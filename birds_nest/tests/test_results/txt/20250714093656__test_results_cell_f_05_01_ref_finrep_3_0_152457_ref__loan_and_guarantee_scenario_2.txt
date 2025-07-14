@@ -1,0 +1,334 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.1, pytest-8.3.4, pluggy-1.5.0 -- C:\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\neil\bird_mssql\BIRD_MSSQL\birds_nest
+configfile: pyproject.toml
+plugins: xdist-3.6.1
+collecting ... collected 1 item
+
+tests/test_cell_f_05_01_ref_finrep_3_0_152457_ref__loan_and_guarantee_scenario_2.py::test_execute_datapoint FAILED [100%]
+
+================================== FAILURES ===================================
+___________________________ test_execute_datapoint ____________________________
+
+value = 11
+
+    def test_execute_datapoint(value: int=11):
+        data_point_id = 'F_05_01_REF_FINREP_3_0_152457_REF'
+        result = RunExecuteDataPoint.run_execute_data_point(data_point_id)
+        ExecuteDataPoint.delete_lineage_data()
+>       assert result == str(value)
+E       AssertionError: assert '0' == '11'
+E         
+E         - 11
+E         + 0
+
+tests\test_cell_f_05_01_ref_finrep_3_0_152457_ref__loan_and_guarantee_scenario_2.py:16: AssertionError
+---------------------------- Captured stdout call -----------------------------
+Executing data point with ID: F_05_01_REF_FINREP_3_0_152457_REF
+Using lineage-enhanced orchestrator
+Created AORTA Trail: DataPoint_F_05_01_REF_FINREP_3_0_152457_REF_20250714_093657
+Using lineage-enhanced orchestrator
+LookupError: F_05_01_REF_FINREP_3_0
+Using lineage-enhanced orchestrator
+DEBUG: Using global orchestration for F_05_01_REF_FINREP_3_0_Table
+  Global Trail: 42
+  Global MetaDataTrail: 42
+Created new table for: F_05_01_REF_FINREP_3_0
+Created TableCreationFunction for F_05_01_REF_FINREP_3_0_Table.calc_F_05_01_REF_FINREP_3_0s with 0 source tables and 0 column references
+LookupError: F_05_01_REF_FINREP_3_0_UnionTable
+Using lineage-enhanced orchestrator
+LookupError: F_05_01_REF_FINREP_3_0_Credit_card_debt
+Using lineage-enhanced orchestrator
+DEBUG: Using global orchestration for F_05_01_REF_FINREP_3_0_Credit_card_debt_Table
+  Global Trail: 42
+  Global MetaDataTrail: 42
+Created new table for: F_05_01_REF_FINREP_3_0_Credit_card_debt
+Created TableCreationFunction for F_05_01_REF_FINREP_3_0_Credit_card_debt_Table.calc_Credit_card_debts with 6 source tables and 0 column references
+relevant_model: <class 'pybirdai.bird_data_model.CLLTRL'>
+newObject: <QuerySet []>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_ENTTY_RL_ASSGNMNT'>
+newObject: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_ENTTY_RL_ASSGNMNT'>
+newObject: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+Created new table for: INSTRMNT_ENTTY_RL_ASSGNMNT
+Using Django model fields for INSTRMNT_ENTTY_RL_ASSGNMNT: 15 fields
+DEBUG: Using global orchestration for INSTRMNT_ENTTY_RL_ASSGNMNT_Table
+  Global Trail: 42
+  Global MetaDataTrail: 42
+Reusing existing table for: INSTRMNT_ENTTY_RL_ASSGNMNT
+Tracked Django model access: INSTRMNT_ENTTY_RL_ASSGNMNT (1 rows)
+persist_object_as_csv succesfully written: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_RL'>
+newObject: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_RL'>
+newObject: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+Created new table for: INSTRMNT_RL
+Using Django model fields for INSTRMNT_RL: 97 fields
+DEBUG: Using global orchestration for INSTRMNT_RL_Table
+  Global Trail: 42
+  Global MetaDataTrail: 42
+Reusing existing table for: INSTRMNT_RL
+Tracked Django model access: INSTRMNT_RL (1 rows)
+persist_object_as_csv succesfully written: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT'>
+newObject: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT'>
+newObject: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+Created new table for: INSTRMNT
+Using Django model fields for INSTRMNT: 39 fields
+DEBUG: Using global orchestration for INSTRMNT_Table
+  Global Trail: 42
+  Global MetaDataTrail: 42
+Reusing existing table for: INSTRMNT
+Tracked Django model access: INSTRMNT (1 rows)
+persist_object_as_csv succesfully written: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.PRTY'>
+newObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.PRTY'>
+newObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+Created new table for: PRTY
+Using Django model fields for PRTY: 50 fields
+DEBUG: Using global orchestration for PRTY_Table
+  Global Trail: 42
+  Global MetaDataTrail: 42
+Reusing existing table for: PRTY
+Tracked Django model access: PRTY (2 rows)
+persist_object_as_csv succesfully written: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.SCRTY_EXCHNG_TRDBL_DRVTV'>
+newObject: <QuerySet []>
+persist_object_as_csv theObject: <pybirdai.process_steps.filter_code.F_05_01_REF_FINREP_3_0_logic.F_05_01_REF_FINREP_3_0_Credit_card_debt_Table object at 0x000002766CD2C980>
+persist_object_as_csv succesfully written: <pybirdai.process_steps.filter_code.F_05_01_REF_FINREP_3_0_logic.F_05_01_REF_FINREP_3_0_Credit_card_debt_Table object at 0x000002766CD2C980>
+DEBUG: Orchestration for F_05_01_REF_FINREP_3_0_Credit_card_debt_Table:
+  Trail: 42
+  MetaDataTrail: 42
+Reusing existing table for: F_05_01_REF_FINREP_3_0_Credit_card_debt
+LookupError: F_05_01_REF_FINREP_3_0_Finance_leases
+Using lineage-enhanced orchestrator
+DEBUG: Using global orchestration for F_05_01_REF_FINREP_3_0_Finance_leases_Table
+  Global Trail: 42
+  Global MetaDataTrail: 42
+Created new table for: F_05_01_REF_FINREP_3_0_Finance_leases
+Created TableCreationFunction for F_05_01_REF_FINREP_3_0_Finance_leases_Table.calc_Finance_leasess with 6 source tables and 0 column references
+relevant_model: <class 'pybirdai.bird_data_model.CLLTRL'>
+newObject: <QuerySet []>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_ENTTY_RL_ASSGNMNT'>
+newObject: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_ENTTY_RL_ASSGNMNT'>
+newObject: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+Reusing existing table for: INSTRMNT_ENTTY_RL_ASSGNMNT
+DEBUG: Using global orchestration for INSTRMNT_ENTTY_RL_ASSGNMNT_Table
+  Global Trail: 42
+  Global MetaDataTrail: 42
+Reusing existing table for: INSTRMNT_ENTTY_RL_ASSGNMNT
+Found existing row for INSTRMNT_ENTTY_RL_ASSGNMNT, reusing instead of creating duplicate
+Tracked Django model access: INSTRMNT_ENTTY_RL_ASSGNMNT (1 rows)
+persist_object_as_csv succesfully written: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_RL'>
+newObject: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_RL'>
+newObject: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+Reusing existing table for: INSTRMNT_RL
+Object of type INSTRMNT_RL_Table already initialized, skipping.
+Tracked Django model access: INSTRMNT_RL (1 rows)
+persist_object_as_csv succesfully written: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT'>
+newObject: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT'>
+newObject: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+Reusing existing table for: INSTRMNT
+Object of type INSTRMNT_Table already initialized, skipping.
+Found existing row for INSTRMNT, reusing instead of creating duplicate
+Tracked Django model access: INSTRMNT (1 rows)
+persist_object_as_csv succesfully written: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.PRTY'>
+newObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.PRTY'>
+newObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+Reusing existing table for: PRTY
+Object of type PRTY_Table already initialized, skipping.
+Found existing row for PRTY, reusing instead of creating duplicate
+Found existing row for PRTY, reusing instead of creating duplicate
+Tracked Django model access: PRTY (2 rows)
+persist_object_as_csv succesfully written: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.SCRTY_EXCHNG_TRDBL_DRVTV'>
+newObject: <QuerySet []>
+persist_object_as_csv theObject: <pybirdai.process_steps.filter_code.F_05_01_REF_FINREP_3_0_logic.F_05_01_REF_FINREP_3_0_Finance_leases_Table object at 0x000002766CD2E3C0>
+persist_object_as_csv succesfully written: <pybirdai.process_steps.filter_code.F_05_01_REF_FINREP_3_0_logic.F_05_01_REF_FINREP_3_0_Finance_leases_Table object at 0x000002766CD2E3C0>
+DEBUG: Orchestration for F_05_01_REF_FINREP_3_0_Finance_leases_Table:
+  Trail: 42
+  MetaDataTrail: 42
+Reusing existing table for: F_05_01_REF_FINREP_3_0_Finance_leases
+LookupError: F_05_01_REF_FINREP_3_0_Non_Negotiable_bonds
+Using lineage-enhanced orchestrator
+Object of type F_05_01_REF_FINREP_3_0_Non_Negotiable_bonds_Table already initialized, skipping.
+relevant_model: <class 'pybirdai.bird_data_model.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT'>
+newObject: <QuerySet []>
+relevant_model: <class 'pybirdai.bird_data_model.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT'>
+newObject: <QuerySet []>
+relevant_model: <class 'pybirdai.bird_data_model.PRTY'>
+newObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.PRTY'>
+newObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+Reusing existing table for: PRTY
+Object of type PRTY_Table already initialized, skipping.
+Found existing row for PRTY, reusing instead of creating duplicate
+Found existing row for PRTY, reusing instead of creating duplicate
+Tracked Django model access: PRTY (2 rows)
+persist_object_as_csv succesfully written: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.SCRTY_ENTTY_RL_ASSGNMNT'>
+newObject: <QuerySet []>
+relevant_model: <class 'pybirdai.bird_data_model.SCRTY_EXCHNG_TRDBL_DRVTV'>
+newObject: <QuerySet []>
+relevant_model: <class 'pybirdai.bird_data_model.SCRTY_PSTN'>
+newObject: <QuerySet []>
+Could not call function called init: 'NoneType' object is not iterable
+LookupError: F_05_01_REF_FINREP_3_0_Other_loans
+Using lineage-enhanced orchestrator
+Object of type F_05_01_REF_FINREP_3_0_Other_loans_Table already initialized, skipping.
+relevant_model: <class 'pybirdai.bird_data_model.CLLTRL'>
+newObject: <QuerySet []>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_ENTTY_RL_ASSGNMNT'>
+newObject: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_ENTTY_RL_ASSGNMNT'>
+newObject: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+Reusing existing table for: INSTRMNT_ENTTY_RL_ASSGNMNT
+Object of type INSTRMNT_ENTTY_RL_ASSGNMNT_Table already initialized, skipping.
+Found existing row for INSTRMNT_ENTTY_RL_ASSGNMNT, reusing instead of creating duplicate
+Tracked Django model access: INSTRMNT_ENTTY_RL_ASSGNMNT (1 rows)
+persist_object_as_csv succesfully written: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_RL'>
+newObject: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_RL'>
+newObject: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+Reusing existing table for: INSTRMNT_RL
+Object of type INSTRMNT_RL_Table already initialized, skipping.
+Tracked Django model access: INSTRMNT_RL (1 rows)
+persist_object_as_csv succesfully written: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT'>
+newObject: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT'>
+newObject: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+Reusing existing table for: INSTRMNT
+DEBUG: Using global orchestration for INSTRMNT_Table
+  Global Trail: 42
+  Global MetaDataTrail: 42
+Reusing existing table for: INSTRMNT
+Found existing row for INSTRMNT, reusing instead of creating duplicate
+Tracked Django model access: INSTRMNT (1 rows)
+persist_object_as_csv succesfully written: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.PRTY'>
+newObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.PRTY'>
+newObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+Reusing existing table for: PRTY
+Object of type PRTY_Table already initialized, skipping.
+Found existing row for PRTY, reusing instead of creating duplicate
+Found existing row for PRTY, reusing instead of creating duplicate
+Tracked Django model access: PRTY (2 rows)
+persist_object_as_csv succesfully written: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.SCRTY_EXCHNG_TRDBL_DRVTV'>
+newObject: <QuerySet []>
+persist_object_as_csv theObject: <pybirdai.process_steps.filter_code.F_05_01_REF_FINREP_3_0_logic.F_05_01_REF_FINREP_3_0_Other_loans_Table object at 0x000002766CD2E120>
+Created DerivedTableRow 189 for Other_loans.ACCNTNG_CLSSFCTN
+Error finding source value object: Field 'value' expected a number but got 'S14_A'.
+persist_object_as_csv succesfully written: <pybirdai.process_steps.filter_code.F_05_01_REF_FINREP_3_0_logic.F_05_01_REF_FINREP_3_0_Other_loans_Table object at 0x000002766CD2E120>
+DEBUG: Orchestration for F_05_01_REF_FINREP_3_0_Other_loans_Table:
+  Trail: 42
+  MetaDataTrail: 42
+Created new table for: F_05_01_REF_FINREP_3_0_Other_loans
+Created TableCreationFunction for F_05_01_REF_FINREP_3_0_Other_loans_Table.calc_Other_loanss with 6 source tables and 0 column references
+LookupError: F_05_01_REF_FINREP_3_0_Trade_receivables
+Using lineage-enhanced orchestrator
+DEBUG: Using global orchestration for F_05_01_REF_FINREP_3_0_Trade_receivables_Table
+  Global Trail: 42
+  Global MetaDataTrail: 42
+Created new table for: F_05_01_REF_FINREP_3_0_Trade_receivables
+Created TableCreationFunction for F_05_01_REF_FINREP_3_0_Trade_receivables_Table.calc_Trade_receivabless with 6 source tables and 0 column references
+relevant_model: <class 'pybirdai.bird_data_model.CLLTRL'>
+newObject: <QuerySet []>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_ENTTY_RL_ASSGNMNT'>
+newObject: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_ENTTY_RL_ASSGNMNT'>
+newObject: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+Reusing existing table for: INSTRMNT_ENTTY_RL_ASSGNMNT
+DEBUG: Using global orchestration for INSTRMNT_ENTTY_RL_ASSGNMNT_Table
+  Global Trail: 42
+  Global MetaDataTrail: 42
+Reusing existing table for: INSTRMNT_ENTTY_RL_ASSGNMNT
+Found existing row for INSTRMNT_ENTTY_RL_ASSGNMNT, reusing instead of creating duplicate
+Tracked Django model access: INSTRMNT_ENTTY_RL_ASSGNMNT (1 rows)
+persist_object_as_csv succesfully written: <QuerySet [<INSTRMNT_ENTTY_RL_ASSGNMNT: INSTRMNT_ENTTY_RL_ASSGNMNT object (123321_78451209_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_RL'>
+newObject: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT_RL'>
+newObject: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+Reusing existing table for: INSTRMNT_RL
+Object of type INSTRMNT_RL_Table already initialized, skipping.
+Tracked Django model access: INSTRMNT_RL (1 rows)
+persist_object_as_csv succesfully written: <QuerySet [<INSTRMNT_RL: INSTRMNT_RL object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT'>
+newObject: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.INSTRMNT'>
+newObject: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+Reusing existing table for: INSTRMNT
+DEBUG: Using global orchestration for INSTRMNT_Table
+  Global Trail: 42
+  Global MetaDataTrail: 42
+Reusing existing table for: INSTRMNT
+Found existing row for INSTRMNT, reusing instead of creating duplicate
+Tracked Django model access: INSTRMNT (1 rows)
+persist_object_as_csv succesfully written: <QuerySet [<INSTRMNT: INSTRMNT object (123321_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.PRTY'>
+newObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+persist_object_as_csv theObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.PRTY'>
+newObject: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+Reusing existing table for: PRTY
+Object of type PRTY_Table already initialized, skipping.
+Found existing row for PRTY, reusing instead of creating duplicate
+Found existing row for PRTY, reusing instead of creating duplicate
+Tracked Django model access: PRTY (2 rows)
+persist_object_as_csv succesfully written: <QuerySet [<PRTY: PRTY object (78451209_2018-09-30_BLZ10)>, <PRTY: PRTY object (BLZ10_2018-09-30_BLZ10)>]>
+relevant_model: <class 'pybirdai.bird_data_model.SCRTY_EXCHNG_TRDBL_DRVTV'>
+newObject: <QuerySet []>
+persist_object_as_csv theObject: <pybirdai.process_steps.filter_code.F_05_01_REF_FINREP_3_0_logic.F_05_01_REF_FINREP_3_0_Trade_receivables_Table object at 0x000002766CD2E510>
+persist_object_as_csv succesfully written: <pybirdai.process_steps.filter_code.F_05_01_REF_FINREP_3_0_logic.F_05_01_REF_FINREP_3_0_Trade_receivables_Table object at 0x000002766CD2E510>
+DEBUG: Orchestration for F_05_01_REF_FINREP_3_0_Trade_receivables_Table:
+  Trail: 42
+  MetaDataTrail: 42
+Reusing existing table for: F_05_01_REF_FINREP_3_0_Trade_receivables
+persist_object_as_csv theObject: <pybirdai.process_steps.filter_code.F_05_01_REF_FINREP_3_0_logic.F_05_01_REF_FINREP_3_0_UnionTable object at 0x000002766CD2CAD0>
+persist_object_as_csv succesfully written: <pybirdai.process_steps.filter_code.F_05_01_REF_FINREP_3_0_logic.F_05_01_REF_FINREP_3_0_UnionTable object at 0x000002766CD2CAD0>
+persist_object_as_csv theObject: <pybirdai.process_steps.filter_code.output_tables.F_05_01_REF_FINREP_3_0_Table object at 0x000002766CD2C6E0>
+Created DerivedTableRow 192 for F_05_01_REF_FINREP_3_0.ACCNTNG_CLSSFCTN
+Error finding source value object: Field 'value' expected a number but got 'S14_A'.
+persist_object_as_csv succesfully written: <pybirdai.process_steps.filter_code.output_tables.F_05_01_REF_FINREP_3_0_Table object at 0x000002766CD2C6E0>
+DEBUG: Orchestration for F_05_01_REF_FINREP_3_0_Table:
+  Trail: 42
+  MetaDataTrail: 42
+Reusing existing table for: F_05_01_REF_FINREP_3_0
+AORTA Trail created: DataPoint_F_05_01_REF_FINREP_3_0_152457_REF_20250714_093657 (ID: 42)
+  DatabaseTables: 124
+  PopulatedTables: 124
+  DatabaseFields: 6231
+  DatabaseRows: 155
+=========================== short test summary info ===========================
+FAILED tests/test_cell_f_05_01_ref_finrep_3_0_152457_ref__loan_and_guarantee_scenario_2.py::test_execute_datapoint
+============================== 1 failed in 1.92s ==============================
