@@ -1,8 +1,9 @@
-﻿Main Category,Name,slice_name
+Main Category,Name,slice_name
 TYP_INSTRMNT_1003,Reverse repurchase agreements,Reverse repurchase agreements
 TYP_INSTRMNT_114,Other loans,Other loans
 TYP_INSTRMNT_114,Other loans,Non Negotiable bonds
-TYP_INSTRMNT_141,Advances that are not loans,Advances that are not loans
+TYP_INSTRMNT_22,Advances that are not loans,Advances that are not loans
+TYP_INSTRMNT_1000,Advances that are not loans,On demand and short notice
 TYP_INSTRMNT_1491,Commercial real estate CRE loans,Commercial real estate CRE loans
 TYP_INSTRMNT_251,Loans and advances,Other loans
 TYP_INSTRMNT_251,Loans and advances,Non Negotiable bonds
