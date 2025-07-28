@@ -138,27 +138,14 @@ class F_01_02_REF_FINREP_3_0_UnionTable :
 
 
 class Deposits(F_01_02_REF_FINREP_3_0_Base):
-	CRDT_FCLTY = None # CRDT_FCLTY
-	@lineage(dependencies={"CRDT_FCLTY.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.CRDT_FCLTY.ACCNTNG_CLSSFCTN
 	INSTRMNT = None # INSTRMNT
-	@lineage(dependencies={"INSTRMNT.INSTRMNT_TYP_ORGN"})
-	def TYP_INSTRMNT(self):
-		return self.INSTRMNT.INSTRMNT_TYP_ORGN
 	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
 	def TYP_INSTRMNT(self):
 		return self.INSTRMNT.TYP_INSTRMNT
 	INSTRMNT_RL = None # INSTRMNT_RL
-	@lineage(dependencies={"INSTRMNT_RL.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.INSTRMNT_RL.ACCNTNG_CLSSFCTN
 	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.INSTRMNT_RL.CRRYNG_AMNT
-	@lineage(dependencies={"INSTRMNT_RL.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.INSTRMNT_RL.HLD_SL_INDCTR
 	@lineage(dependencies={"INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR"})
 	def SBJCT_IMPRMNT_INDCTR(self):
 		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
@@ -168,135 +155,68 @@ class Deferred_tax_liabilities(F_01_02_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Provisions(F_01_02_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Provisions_Employee_benefits_Other_than_pension_and_other_post_employment_defined_benefit_obligations(F_01_02_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Provisions_Employee_benefits_Pension_and_other_post_employment_defined_benefit_obligations(F_01_02_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Provisions_Funds_for_general_banking_risks(F_01_02_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Provisions_Other_than_commitments_and_guarantees_given_and_payment_commitments_to_resolution_funds_and_deposit_guarantee_schemes(F_01_02_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Provisions_Pending_legal_issues_and_tax_litigation(F_01_02_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Provisions_Restructuring(F_01_02_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Share_capital_repayable_on_demand(F_01_02_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Tax_liabilities(F_01_02_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Other_financial_liabilities(F_01_02_REF_FINREP_3_0_Base):
 	NN_FNNCL_LBLTY = None # NN_FNNCL_LBLTY
 	@lineage(dependencies={"NN_FNNCL_LBLTY.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_LBLTY.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_LBLTY.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_LBLTY.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_LBLTY.TYP_NN_FNNCL_LBLTY"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_LBLTY.TYP_NN_FNNCL_LBLTY
 
 class F_01_02_REF_FINREP_3_0_Deposits_Table:
-	CRDT_FCLTY_Table = None # CRDT_FCLTY
 	INSTRMNT_Table = None # INSTRMNT
 	INSTRMNT_RL_Table = None # INSTRMNT_RL
 	Depositss = []# Deposits[]

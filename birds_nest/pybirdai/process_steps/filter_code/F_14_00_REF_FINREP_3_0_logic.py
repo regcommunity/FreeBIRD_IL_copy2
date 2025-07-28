@@ -37,9 +37,6 @@ class F_14_00_REF_FINREP_3_0_UnionItem:
 	def FV_HRRCHY(self) -> str:
 		''' return string from FV_HRRCHY enumeration '''
 		return self.base.FV_HRRCHY()
-	@lineage(dependencies={"base.FV"})
-	def FV(self) -> int:
-		return self.base.FV()
 	@lineage(dependencies={"base.FV_CHNG"})
 	def FV_CHNG(self) -> int:
 		return self.base.FV_CHNG()
@@ -68,32 +65,25 @@ class F_14_00_REF_FINREP_3_0_Base:
 	def FV_HRRCHY() -> str:
 		''' return string from FV_HRRCHY enumeration '''
 		pass
-	def FV() -> int:
-		pass
 	def FV_CHNG() -> int:
 		pass
 
 class F_14_00_REF_FINREP_3_0_UnionTable :
 	F_14_00_REF_FINREP_3_0_UnionItems = [] # F_14_00_REF_FINREP_3_0_UnionItem []
-	F_14_00_REF_FINREP_3_0_Other_loans_Table = None # Other_loans
 	F_14_00_REF_FINREP_3_0_Deposits_Table = None # Deposits
+	F_14_00_REF_FINREP_3_0_Other_loans_Table = None # Other_loans
 	F_14_00_REF_FINREP_3_0_Non_Negotiable_bonds_Table = None # Non_Negotiable_bonds
-	F_14_00_REF_FINREP_3_0_Other_financial_liabilities_Table = None # Other_financial_liabilities
 	def calc_F_14_00_REF_FINREP_3_0_UnionItems(self) -> list[F_14_00_REF_FINREP_3_0_UnionItem] :
 		items = [] # F_14_00_REF_FINREP_3_0_UnionItem []
-		for item in self.F_14_00_REF_FINREP_3_0_Other_loans_Table.Other_loanss:
-			newItem = F_14_00_REF_FINREP_3_0_UnionItem()
-			newItem.base = item
-			items.append(newItem)
 		for item in self.F_14_00_REF_FINREP_3_0_Deposits_Table.Depositss:
 			newItem = F_14_00_REF_FINREP_3_0_UnionItem()
 			newItem.base = item
 			items.append(newItem)
-		for item in self.F_14_00_REF_FINREP_3_0_Non_Negotiable_bonds_Table.Non_Negotiable_bondss:
+		for item in self.F_14_00_REF_FINREP_3_0_Other_loans_Table.Other_loanss:
 			newItem = F_14_00_REF_FINREP_3_0_UnionItem()
 			newItem.base = item
 			items.append(newItem)
-		for item in self.F_14_00_REF_FINREP_3_0_Other_financial_liabilities_Table.Other_financial_liabilitiess:
+		for item in self.F_14_00_REF_FINREP_3_0_Non_Negotiable_bonds_Table.Non_Negotiable_bondss:
 			newItem = F_14_00_REF_FINREP_3_0_UnionItem()
 			newItem.base = item
 			items.append(newItem)
@@ -107,25 +97,12 @@ class F_14_00_REF_FINREP_3_0_UnionTable :
 		return None
 
 
-class Other_loans(F_14_00_REF_FINREP_3_0_Base):
-	CLLTRL = None # CLLTRL
-	@lineage(dependencies={"CLLTRL.FV"})
-	def FV(self):
-		return self.CLLTRL.FV
+class Deposits(F_14_00_REF_FINREP_3_0_Base):
 	CRDT_FCLTY = None # CRDT_FCLTY
 	@lineage(dependencies={"CRDT_FCLTY.ACCMLTD_CHNGS_FV"})
 	def ACCMLTD_CHNGS_FV(self):
 		return self.CRDT_FCLTY.ACCMLTD_CHNGS_FV
-	@lineage(dependencies={"CRDT_FCLTY.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.CRDT_FCLTY.ACCNTNG_CLSSFCTN
-	@lineage(dependencies={"CRDT_FCLTY.FV"})
-	def FV(self):
-		return self.CRDT_FCLTY.FV
 	INSTRMNT = None # INSTRMNT
-	@lineage(dependencies={"INSTRMNT.INSTRMNT_TYP_ORGN"})
-	def TYP_INSTRMNT(self):
-		return self.INSTRMNT.INSTRMNT_TYP_ORGN
 	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
 	def TYP_INSTRMNT(self):
 		return self.INSTRMNT.TYP_INSTRMNT
@@ -133,21 +110,29 @@ class Other_loans(F_14_00_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"INSTRMNT_RL.ACCMLTD_CHNGS_FV"})
 	def ACCMLTD_CHNGS_FV(self):
 		return self.INSTRMNT_RL.ACCMLTD_CHNGS_FV
-	@lineage(dependencies={"INSTRMNT_RL.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.INSTRMNT_RL.ACCNTNG_CLSSFCTN
-	@lineage(dependencies={"INSTRMNT_RL.FV"})
-	def FV(self):
-		return self.INSTRMNT_RL.FV
 	@lineage(dependencies={"INSTRMNT_RL.FV_CHNG"})
 	def FV_CHNG(self):
 		return self.INSTRMNT_RL.FV_CHNG
-	@lineage(dependencies={"INSTRMNT_RL.FV_HRRCHY"})
-	def FV_HRRCHY(self):
-		return self.INSTRMNT_RL.FV_HRRCHY
-	@lineage(dependencies={"INSTRMNT_RL.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.INSTRMNT_RL.HLD_SL_INDCTR
+	@lineage(dependencies={"INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR"})
+	def SBJCT_IMPRMNT_INDCTR(self):
+		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
+
+class Other_loans(F_14_00_REF_FINREP_3_0_Base):
+	CRDT_FCLTY = None # CRDT_FCLTY
+	@lineage(dependencies={"CRDT_FCLTY.ACCMLTD_CHNGS_FV"})
+	def ACCMLTD_CHNGS_FV(self):
+		return self.CRDT_FCLTY.ACCMLTD_CHNGS_FV
+	INSTRMNT = None # INSTRMNT
+	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
+	def TYP_INSTRMNT(self):
+		return self.INSTRMNT.TYP_INSTRMNT
+	INSTRMNT_RL = None # INSTRMNT_RL
+	@lineage(dependencies={"INSTRMNT_RL.ACCMLTD_CHNGS_FV"})
+	def ACCMLTD_CHNGS_FV(self):
+		return self.INSTRMNT_RL.ACCMLTD_CHNGS_FV
+	@lineage(dependencies={"INSTRMNT_RL.FV_CHNG"})
+	def FV_CHNG(self):
+		return self.INSTRMNT_RL.FV_CHNG
 	@lineage(dependencies={"INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR"})
 	def SBJCT_IMPRMNT_INDCTR(self):
 		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
@@ -156,64 +141,14 @@ class Other_loans(F_14_00_REF_FINREP_3_0_Base):
 	def NGTBL_SCRTY_INDCTR(self):
 		return self.SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR
 
-class Deposits(F_14_00_REF_FINREP_3_0_Base):
-	CRDT_FCLTY = None # CRDT_FCLTY
-	@lineage(dependencies={"CRDT_FCLTY.ACCMLTD_CHNGS_FV"})
-	def ACCMLTD_CHNGS_FV(self):
-		return self.CRDT_FCLTY.ACCMLTD_CHNGS_FV
-	@lineage(dependencies={"CRDT_FCLTY.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.CRDT_FCLTY.ACCNTNG_CLSSFCTN
-	@lineage(dependencies={"CRDT_FCLTY.FV"})
-	def FV(self):
-		return self.CRDT_FCLTY.FV
-	INSTRMNT = None # INSTRMNT
-	@lineage(dependencies={"INSTRMNT.INSTRMNT_TYP_ORGN"})
-	def TYP_INSTRMNT(self):
-		return self.INSTRMNT.INSTRMNT_TYP_ORGN
-	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
-	def TYP_INSTRMNT(self):
-		return self.INSTRMNT.TYP_INSTRMNT
-	INSTRMNT_RL = None # INSTRMNT_RL
-	@lineage(dependencies={"INSTRMNT_RL.ACCMLTD_CHNGS_FV"})
-	def ACCMLTD_CHNGS_FV(self):
-		return self.INSTRMNT_RL.ACCMLTD_CHNGS_FV
-	@lineage(dependencies={"INSTRMNT_RL.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.INSTRMNT_RL.ACCNTNG_CLSSFCTN
-	@lineage(dependencies={"INSTRMNT_RL.FV"})
-	def FV(self):
-		return self.INSTRMNT_RL.FV
-	@lineage(dependencies={"INSTRMNT_RL.FV_CHNG"})
-	def FV_CHNG(self):
-		return self.INSTRMNT_RL.FV_CHNG
-	@lineage(dependencies={"INSTRMNT_RL.FV_HRRCHY"})
-	def FV_HRRCHY(self):
-		return self.INSTRMNT_RL.FV_HRRCHY
-	@lineage(dependencies={"INSTRMNT_RL.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.INSTRMNT_RL.HLD_SL_INDCTR
-	@lineage(dependencies={"INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR"})
-	def SBJCT_IMPRMNT_INDCTR(self):
-		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
-
 class Non_Negotiable_bonds(F_14_00_REF_FINREP_3_0_Base):
 	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT
 	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.ACCMLTD_CHNGS_FV"})
 	def ACCMLTD_CHNGS_FV(self):
 		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.ACCMLTD_CHNGS_FV
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.ACCNTNG_CLSSFCTN
 	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.FV_CHNG"})
 	def FV_CHNG(self):
 		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.FV_CHNG
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.HLD_SL_INDCTR
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.SBJCT_IMPRMNT_INDCTR"})
-	def SBJCT_IMPRMNT_INDCTR(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.SBJCT_IMPRMNT_INDCTR
 	SCRTY_EXCHNG_TRDBL_DRVTV = None # SCRTY_EXCHNG_TRDBL_DRVTV
 	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR"})
 	def NGTBL_SCRTY_INDCTR(self):
@@ -222,42 +157,9 @@ class Non_Negotiable_bonds(F_14_00_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"SCRTY_PSTN.ACCMLTD_CHNGS_FV"})
 	def ACCMLTD_CHNGS_FV(self):
 		return self.SCRTY_PSTN.ACCMLTD_CHNGS_FV
-	@lineage(dependencies={"SCRTY_PSTN.FV"})
-	def FV(self):
-		return self.SCRTY_PSTN.FV
 	@lineage(dependencies={"SCRTY_PSTN.FV_CHNG"})
 	def FV_CHNG(self):
 		return self.SCRTY_PSTN.FV_CHNG
-	@lineage(dependencies={"SCRTY_PSTN.FV_HRRCHY"})
-	def FV_HRRCHY(self):
-		return self.SCRTY_PSTN.FV_HRRCHY
-
-class Other_financial_liabilities(F_14_00_REF_FINREP_3_0_Base):
-	NN_FNNCL_LBLTY = None # NN_FNNCL_LBLTY
-	@lineage(dependencies={"NN_FNNCL_LBLTY.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_LBLTY.HLD_SL_INDCTR
-
-class F_14_00_REF_FINREP_3_0_Other_loans_Table:
-	CLLTRL_Table = None # CLLTRL
-	CRDT_FCLTY_Table = None # CRDT_FCLTY
-	INSTRMNT_Table = None # INSTRMNT
-	INSTRMNT_RL_Table = None # INSTRMNT_RL
-	SCRTY_EXCHNG_TRDBL_DRVTV_Table = None # SCRTY_EXCHNG_TRDBL_DRVTV
-	Other_loanss = []# Other_loans[]
-	def calc_Other_loanss(self) :
-		items = [] # Other_loans[
-		# Join up any refered tables that you need to join
-		# loop through the main table
-		# set any references you want to on the new Item so that it can refer to themin operations
-		return items
-	def init(self):
-		Orchestration().init(self)
-		self.Other_loanss = []
-		self.Other_loanss.extend(self.calc_Other_loanss())
-		CSVConverter.persist_object_as_csv(self,True)
-		return None
-
 
 class F_14_00_REF_FINREP_3_0_Deposits_Table:
 	CRDT_FCLTY_Table = None # CRDT_FCLTY
@@ -278,6 +180,26 @@ class F_14_00_REF_FINREP_3_0_Deposits_Table:
 		return None
 
 
+class F_14_00_REF_FINREP_3_0_Other_loans_Table:
+	CRDT_FCLTY_Table = None # CRDT_FCLTY
+	INSTRMNT_Table = None # INSTRMNT
+	INSTRMNT_RL_Table = None # INSTRMNT_RL
+	SCRTY_EXCHNG_TRDBL_DRVTV_Table = None # SCRTY_EXCHNG_TRDBL_DRVTV
+	Other_loanss = []# Other_loans[]
+	def calc_Other_loanss(self) :
+		items = [] # Other_loans[
+		# Join up any refered tables that you need to join
+		# loop through the main table
+		# set any references you want to on the new Item so that it can refer to themin operations
+		return items
+	def init(self):
+		Orchestration().init(self)
+		self.Other_loanss = []
+		self.Other_loanss.extend(self.calc_Other_loanss())
+		CSVConverter.persist_object_as_csv(self,True)
+		return None
+
+
 class F_14_00_REF_FINREP_3_0_Non_Negotiable_bonds_Table:
 	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT_Table = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT
 	SCRTY_EXCHNG_TRDBL_DRVTV_Table = None # SCRTY_EXCHNG_TRDBL_DRVTV
@@ -293,23 +215,6 @@ class F_14_00_REF_FINREP_3_0_Non_Negotiable_bonds_Table:
 		Orchestration().init(self)
 		self.Non_Negotiable_bondss = []
 		self.Non_Negotiable_bondss.extend(self.calc_Non_Negotiable_bondss())
-		CSVConverter.persist_object_as_csv(self,True)
-		return None
-
-
-class F_14_00_REF_FINREP_3_0_Other_financial_liabilities_Table:
-	NN_FNNCL_LBLTY_Table = None # NN_FNNCL_LBLTY
-	Other_financial_liabilitiess = []# Other_financial_liabilities[]
-	def calc_Other_financial_liabilitiess(self) :
-		items = [] # Other_financial_liabilities[
-		# Join up any refered tables that you need to join
-		# loop through the main table
-		# set any references you want to on the new Item so that it can refer to themin operations
-		return items
-	def init(self):
-		Orchestration().init(self)
-		self.Other_financial_liabilitiess = []
-		self.Other_financial_liabilitiess.extend(self.calc_Other_financial_liabilitiess())
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 

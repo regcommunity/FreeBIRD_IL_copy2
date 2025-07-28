@@ -64,21 +64,9 @@ class Financial_guarantees_given(F_20_05_a_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS_DRVD"})
 	def DFLT_STTS(self):
 		return self.CRDT_FCLTY.DFLT_STTS_DRVD
-	@lineage(dependencies={"CRDT_FCLTY.IMPRMNT_STTS"})
-	def DFLT_STTS(self):
-		return self.CRDT_FCLTY.IMPRMNT_STTS
-	@lineage(dependencies={"CRDT_FCLTY.PRFRMNG_STTS"})
-	def DFLT_STTS(self):
-		return self.CRDT_FCLTY.PRFRMNG_STTS
 	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS"})
 	def PRFRMNG_STTS(self):
 		return self.CRDT_FCLTY.DFLT_STTS
-	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS_DRVD"})
-	def PRFRMNG_STTS(self):
-		return self.CRDT_FCLTY.DFLT_STTS_DRVD
-	@lineage(dependencies={"CRDT_FCLTY.IMPRMNT_STTS"})
-	def PRFRMNG_STTS(self):
-		return self.CRDT_FCLTY.IMPRMNT_STTS
 	@lineage(dependencies={"CRDT_FCLTY.PRFRMNG_STTS"})
 	def PRFRMNG_STTS(self):
 		return self.CRDT_FCLTY.PRFRMNG_STTS

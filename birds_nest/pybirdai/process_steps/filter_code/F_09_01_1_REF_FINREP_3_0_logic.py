@@ -96,30 +96,15 @@ class F_09_01_1_REF_FINREP_3_0_UnionTable :
 
 class Financial_guarantees_given(F_09_01_1_REF_FINREP_3_0_Base):
 	CRDT_FCLTY = None # CRDT_FCLTY
-	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.DFLT_STTS
-	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS_DRVD"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.DFLT_STTS_DRVD
 	@lineage(dependencies={"CRDT_FCLTY.IMPRMNT_STTS"})
 	def IMPRMNT_STTS(self):
 		return self.CRDT_FCLTY.IMPRMNT_STTS
-	@lineage(dependencies={"CRDT_FCLTY.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.PRFRMNG_STTS
 	@lineage(dependencies={"CRDT_FCLTY.NMNL_AMNT"})
 	def NMNL_AMNT(self):
 		return self.CRDT_FCLTY.NMNL_AMNT
 	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS"})
 	def PRFRMNG_STTS(self):
 		return self.CRDT_FCLTY.DFLT_STTS
-	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS_DRVD"})
-	def PRFRMNG_STTS(self):
-		return self.CRDT_FCLTY.DFLT_STTS_DRVD
-	@lineage(dependencies={"CRDT_FCLTY.IMPRMNT_STTS"})
-	def PRFRMNG_STTS(self):
-		return self.CRDT_FCLTY.IMPRMNT_STTS
 	@lineage(dependencies={"CRDT_FCLTY.PRFRMNG_STTS"})
 	def PRFRMNG_STTS(self):
 		return self.CRDT_FCLTY.PRFRMNG_STTS

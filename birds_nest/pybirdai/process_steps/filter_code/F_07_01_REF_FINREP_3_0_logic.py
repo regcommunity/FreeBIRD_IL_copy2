@@ -114,13 +114,20 @@ class F_07_01_REF_FINREP_3_0_Base:
 
 class F_07_01_REF_FINREP_3_0_UnionTable :
 	F_07_01_REF_FINREP_3_0_UnionItems = [] # F_07_01_REF_FINREP_3_0_UnionItem []
+	F_07_01_REF_FINREP_3_0_Advances_that_are_not_loans_Table = None # Advances_that_are_not_loans
 	F_07_01_REF_FINREP_3_0_Credit_card_debt_Table = None # Credit_card_debt
 	F_07_01_REF_FINREP_3_0_Finance_leases_Table = None # Finance_leases
 	F_07_01_REF_FINREP_3_0_Other_loans_Table = None # Other_loans
 	F_07_01_REF_FINREP_3_0_Trade_receivables_Table = None # Trade_receivables
+	F_07_01_REF_FINREP_3_0_On_demand_and_short_notice_Table = None # On_demand_and_short_notice
+	F_07_01_REF_FINREP_3_0_Reverse_repurchase_agreements_Table = None # Reverse_repurchase_agreements
 	F_07_01_REF_FINREP_3_0_Non_Negotiable_bonds_Table = None # Non_Negotiable_bonds
 	def calc_F_07_01_REF_FINREP_3_0_UnionItems(self) -> list[F_07_01_REF_FINREP_3_0_UnionItem] :
 		items = [] # F_07_01_REF_FINREP_3_0_UnionItem []
+		for item in self.F_07_01_REF_FINREP_3_0_Advances_that_are_not_loans_Table.Advances_that_are_not_loanss:
+			newItem = F_07_01_REF_FINREP_3_0_UnionItem()
+			newItem.base = item
+			items.append(newItem)
 		for item in self.F_07_01_REF_FINREP_3_0_Credit_card_debt_Table.Credit_card_debts:
 			newItem = F_07_01_REF_FINREP_3_0_UnionItem()
 			newItem.base = item
@@ -134,6 +141,14 @@ class F_07_01_REF_FINREP_3_0_UnionTable :
 			newItem.base = item
 			items.append(newItem)
 		for item in self.F_07_01_REF_FINREP_3_0_Trade_receivables_Table.Trade_receivabless:
+			newItem = F_07_01_REF_FINREP_3_0_UnionItem()
+			newItem.base = item
+			items.append(newItem)
+		for item in self.F_07_01_REF_FINREP_3_0_On_demand_and_short_notice_Table.On_demand_and_short_notices:
+			newItem = F_07_01_REF_FINREP_3_0_UnionItem()
+			newItem.base = item
+			items.append(newItem)
+		for item in self.F_07_01_REF_FINREP_3_0_Reverse_repurchase_agreements_Table.Reverse_repurchase_agreementss:
 			newItem = F_07_01_REF_FINREP_3_0_UnionItem()
 			newItem.base = item
 			items.append(newItem)
@@ -151,50 +166,19 @@ class F_07_01_REF_FINREP_3_0_UnionTable :
 		return None
 
 
-class Credit_card_debt(F_07_01_REF_FINREP_3_0_Base):
+class Advances_that_are_not_loans(F_07_01_REF_FINREP_3_0_Base):
 	CLLTRL = None # CLLTRL
 	@lineage(dependencies={"CLLTRL.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.CLLTRL.CRRYNG_AMNT
-	@lineage(dependencies={"CLLTRL.TYP_CLLTRL"})
-	def TYP_CLLTRL(self):
-		return self.CLLTRL.TYP_CLLTRL
 	CRDT_FCLTY = None # CRDT_FCLTY
-	@lineage(dependencies={"CRDT_FCLTY.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.CRDT_FCLTY.ACCNTNG_CLSSFCTN
-	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.DFLT_STTS
-	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS_DRVD"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.DFLT_STTS_DRVD
 	@lineage(dependencies={"CRDT_FCLTY.IMPRMNT_STTS"})
 	def IMPRMNT_STTS(self):
 		return self.CRDT_FCLTY.IMPRMNT_STTS
-	@lineage(dependencies={"CRDT_FCLTY.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.PRFRMNG_STTS
-	ENTTY_RL = None # ENTTY_RL
-	@lineage(dependencies={"ENTTY_RL.ENTTY_GRP_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_GRP_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.ENTTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.ENTTY_TRNSCTN_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_TRNSCTN_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.PRTY_RL_TYP
 	INSTRMNT = None # INSTRMNT
 	@lineage(dependencies={"INSTRMNT.RPYMNT_RGHTS"})
 	def RPYMNT_RGHTS(self):
 		return self.INSTRMNT.RPYMNT_RGHTS
-	@lineage(dependencies={"INSTRMNT.INSTRMNT_TYP_ORGN"})
-	def TYP_INSTRMNT(self):
-		return self.INSTRMNT.INSTRMNT_TYP_ORGN
 	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
 	def TYP_INSTRMNT(self):
 		return self.INSTRMNT.TYP_INSTRMNT
@@ -202,34 +186,10 @@ class Credit_card_debt(F_07_01_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR"})
 	def MN_DBTR_INDCTR(self):
 		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR
-	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP
 	INSTRMNT_RL = None # INSTRMNT_RL
-	@lineage(dependencies={"INSTRMNT_RL.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.INSTRMNT_RL.ACCNTNG_CLSSFCTN
 	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.INSTRMNT_RL.CRRYNG_AMNT
-	@lineage(dependencies={"INSTRMNT_RL.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.INSTRMNT_RL.HLD_SL_INDCTR
-	@lineage(dependencies={"INSTRMNT_RL.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.DFLT_STTS
-	@lineage(dependencies={"INSTRMNT_RL.DFLT_STTS_DRVD"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.DFLT_STTS_DRVD
-	@lineage(dependencies={"INSTRMNT_RL.IMPRMNT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.IMPRMNT_STTS
-	@lineage(dependencies={"INSTRMNT_RL.INTL_IMPRMNT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.INTL_IMPRMNT_STTS
-	@lineage(dependencies={"INSTRMNT_RL.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.PRFRMNG_STTS
 	@lineage(dependencies={"INSTRMNT_RL.PRJCT_FNNC_LN"})
 	def PRJCT_FNNC_LN(self):
 		return self.INSTRMNT_RL.PRJCT_FNNC_LN
@@ -240,21 +200,54 @@ class Credit_card_debt(F_07_01_REF_FINREP_3_0_Base):
 	def SBJCT_IMPRMNT_INDCTR(self):
 		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
 	PRTY = None # PRTY
-	@lineage(dependencies={"PRTY.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.PRTY.DFLT_STTS
-	@lineage(dependencies={"PRTY.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.PRTY.PRFRMNG_STTS
 	@lineage(dependencies={"PRTY.INSTTNL_SCTR_EBA_ITS"})
 	def INSTTTNL_SCTR(self):
 		return self.PRTY.INSTTNL_SCTR_EBA_ITS
-	@lineage(dependencies={"PRTY.INSTTNL_SCTR_SHS"})
+	@lineage(dependencies={"PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR"})
+	def MLTLTRL_DVLPMNT_BNK_INDCTR(self):
+		return self.PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR
+	SCRTY_EXCHNG_TRDBL_DRVTV = None # SCRTY_EXCHNG_TRDBL_DRVTV
+	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR"})
+	def NGTBL_SCRTY_INDCTR(self):
+		return self.SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR
+
+class Credit_card_debt(F_07_01_REF_FINREP_3_0_Base):
+	CLLTRL = None # CLLTRL
+	@lineage(dependencies={"CLLTRL.CRRYNG_AMNT"})
+	def CRRYNG_AMNT(self):
+		return self.CLLTRL.CRRYNG_AMNT
+	CRDT_FCLTY = None # CRDT_FCLTY
+	@lineage(dependencies={"CRDT_FCLTY.IMPRMNT_STTS"})
+	def IMPRMNT_STTS(self):
+		return self.CRDT_FCLTY.IMPRMNT_STTS
+	INSTRMNT = None # INSTRMNT
+	@lineage(dependencies={"INSTRMNT.RPYMNT_RGHTS"})
+	def RPYMNT_RGHTS(self):
+		return self.INSTRMNT.RPYMNT_RGHTS
+	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
+	def TYP_INSTRMNT(self):
+		return self.INSTRMNT.TYP_INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT = None # INSTRMNT_ENTTY_RL_ASSGNMNT
+	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR"})
+	def MN_DBTR_INDCTR(self):
+		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR
+	INSTRMNT_RL = None # INSTRMNT_RL
+	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
+	def CRRYNG_AMNT(self):
+		return self.INSTRMNT_RL.CRRYNG_AMNT
+	@lineage(dependencies={"INSTRMNT_RL.PRJCT_FNNC_LN"})
+	def PRJCT_FNNC_LN(self):
+		return self.INSTRMNT_RL.PRJCT_FNNC_LN
+	@lineage(dependencies={"INSTRMNT_RL.PRPS"})
+	def PRPS(self):
+		return self.INSTRMNT_RL.PRPS
+	@lineage(dependencies={"INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR"})
+	def SBJCT_IMPRMNT_INDCTR(self):
+		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
+	PRTY = None # PRTY
+	@lineage(dependencies={"PRTY.INSTTNL_SCTR_EBA_ITS"})
 	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTNL_SCTR_SHS
-	@lineage(dependencies={"PRTY.INSTTTNL_SCTR"})
-	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTTNL_SCTR
+		return self.PRTY.INSTTNL_SCTR_EBA_ITS
 	@lineage(dependencies={"PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR"})
 	def MLTLTRL_DVLPMNT_BNK_INDCTR(self):
 		return self.PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR
@@ -268,45 +261,14 @@ class Finance_leases(F_07_01_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"CLLTRL.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.CLLTRL.CRRYNG_AMNT
-	@lineage(dependencies={"CLLTRL.TYP_CLLTRL"})
-	def TYP_CLLTRL(self):
-		return self.CLLTRL.TYP_CLLTRL
 	CRDT_FCLTY = None # CRDT_FCLTY
-	@lineage(dependencies={"CRDT_FCLTY.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.CRDT_FCLTY.ACCNTNG_CLSSFCTN
-	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.DFLT_STTS
-	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS_DRVD"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.DFLT_STTS_DRVD
 	@lineage(dependencies={"CRDT_FCLTY.IMPRMNT_STTS"})
 	def IMPRMNT_STTS(self):
 		return self.CRDT_FCLTY.IMPRMNT_STTS
-	@lineage(dependencies={"CRDT_FCLTY.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.PRFRMNG_STTS
-	ENTTY_RL = None # ENTTY_RL
-	@lineage(dependencies={"ENTTY_RL.ENTTY_GRP_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_GRP_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.ENTTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.ENTTY_TRNSCTN_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_TRNSCTN_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.PRTY_RL_TYP
 	INSTRMNT = None # INSTRMNT
 	@lineage(dependencies={"INSTRMNT.RPYMNT_RGHTS"})
 	def RPYMNT_RGHTS(self):
 		return self.INSTRMNT.RPYMNT_RGHTS
-	@lineage(dependencies={"INSTRMNT.INSTRMNT_TYP_ORGN"})
-	def TYP_INSTRMNT(self):
-		return self.INSTRMNT.INSTRMNT_TYP_ORGN
 	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
 	def TYP_INSTRMNT(self):
 		return self.INSTRMNT.TYP_INSTRMNT
@@ -314,34 +276,10 @@ class Finance_leases(F_07_01_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR"})
 	def MN_DBTR_INDCTR(self):
 		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR
-	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP
 	INSTRMNT_RL = None # INSTRMNT_RL
-	@lineage(dependencies={"INSTRMNT_RL.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.INSTRMNT_RL.ACCNTNG_CLSSFCTN
 	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.INSTRMNT_RL.CRRYNG_AMNT
-	@lineage(dependencies={"INSTRMNT_RL.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.INSTRMNT_RL.HLD_SL_INDCTR
-	@lineage(dependencies={"INSTRMNT_RL.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.DFLT_STTS
-	@lineage(dependencies={"INSTRMNT_RL.DFLT_STTS_DRVD"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.DFLT_STTS_DRVD
-	@lineage(dependencies={"INSTRMNT_RL.IMPRMNT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.IMPRMNT_STTS
-	@lineage(dependencies={"INSTRMNT_RL.INTL_IMPRMNT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.INTL_IMPRMNT_STTS
-	@lineage(dependencies={"INSTRMNT_RL.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.PRFRMNG_STTS
 	@lineage(dependencies={"INSTRMNT_RL.PRJCT_FNNC_LN"})
 	def PRJCT_FNNC_LN(self):
 		return self.INSTRMNT_RL.PRJCT_FNNC_LN
@@ -352,21 +290,9 @@ class Finance_leases(F_07_01_REF_FINREP_3_0_Base):
 	def SBJCT_IMPRMNT_INDCTR(self):
 		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
 	PRTY = None # PRTY
-	@lineage(dependencies={"PRTY.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.PRTY.DFLT_STTS
-	@lineage(dependencies={"PRTY.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.PRTY.PRFRMNG_STTS
 	@lineage(dependencies={"PRTY.INSTTNL_SCTR_EBA_ITS"})
 	def INSTTTNL_SCTR(self):
 		return self.PRTY.INSTTNL_SCTR_EBA_ITS
-	@lineage(dependencies={"PRTY.INSTTNL_SCTR_SHS"})
-	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTNL_SCTR_SHS
-	@lineage(dependencies={"PRTY.INSTTTNL_SCTR"})
-	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTTNL_SCTR
 	@lineage(dependencies={"PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR"})
 	def MLTLTRL_DVLPMNT_BNK_INDCTR(self):
 		return self.PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR
@@ -377,48 +303,17 @@ class Finance_leases(F_07_01_REF_FINREP_3_0_Base):
 
 class Other_loans(F_07_01_REF_FINREP_3_0_Base):
 	CLLTRL = None # CLLTRL
-	@lineage(dependencies={"CLLTRL.CRRYNG_AMNT"})
-	def CRRYNG_AMNT(self):
-		return self.CLLTRL.CRRYNG_AMNT
 	@lineage(dependencies={"CLLTRL.TYP_CLLTRL"})
 	def TYP_CLLTRL(self):
 		return self.CLLTRL.TYP_CLLTRL
 	CRDT_FCLTY = None # CRDT_FCLTY
-	@lineage(dependencies={"CRDT_FCLTY.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.CRDT_FCLTY.ACCNTNG_CLSSFCTN
-	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.DFLT_STTS
-	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS_DRVD"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.DFLT_STTS_DRVD
 	@lineage(dependencies={"CRDT_FCLTY.IMPRMNT_STTS"})
 	def IMPRMNT_STTS(self):
 		return self.CRDT_FCLTY.IMPRMNT_STTS
-	@lineage(dependencies={"CRDT_FCLTY.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.PRFRMNG_STTS
-	ENTTY_RL = None # ENTTY_RL
-	@lineage(dependencies={"ENTTY_RL.ENTTY_GRP_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_GRP_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.ENTTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.ENTTY_TRNSCTN_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_TRNSCTN_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.PRTY_RL_TYP
 	INSTRMNT = None # INSTRMNT
 	@lineage(dependencies={"INSTRMNT.RPYMNT_RGHTS"})
 	def RPYMNT_RGHTS(self):
 		return self.INSTRMNT.RPYMNT_RGHTS
-	@lineage(dependencies={"INSTRMNT.INSTRMNT_TYP_ORGN"})
-	def TYP_INSTRMNT(self):
-		return self.INSTRMNT.INSTRMNT_TYP_ORGN
 	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
 	def TYP_INSTRMNT(self):
 		return self.INSTRMNT.TYP_INSTRMNT
@@ -426,34 +321,10 @@ class Other_loans(F_07_01_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR"})
 	def MN_DBTR_INDCTR(self):
 		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR
-	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP
 	INSTRMNT_RL = None # INSTRMNT_RL
-	@lineage(dependencies={"INSTRMNT_RL.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.INSTRMNT_RL.ACCNTNG_CLSSFCTN
 	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.INSTRMNT_RL.CRRYNG_AMNT
-	@lineage(dependencies={"INSTRMNT_RL.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.INSTRMNT_RL.HLD_SL_INDCTR
-	@lineage(dependencies={"INSTRMNT_RL.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.DFLT_STTS
-	@lineage(dependencies={"INSTRMNT_RL.DFLT_STTS_DRVD"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.DFLT_STTS_DRVD
-	@lineage(dependencies={"INSTRMNT_RL.IMPRMNT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.IMPRMNT_STTS
-	@lineage(dependencies={"INSTRMNT_RL.INTL_IMPRMNT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.INTL_IMPRMNT_STTS
-	@lineage(dependencies={"INSTRMNT_RL.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.PRFRMNG_STTS
 	@lineage(dependencies={"INSTRMNT_RL.PRJCT_FNNC_LN"})
 	def PRJCT_FNNC_LN(self):
 		return self.INSTRMNT_RL.PRJCT_FNNC_LN
@@ -464,21 +335,9 @@ class Other_loans(F_07_01_REF_FINREP_3_0_Base):
 	def SBJCT_IMPRMNT_INDCTR(self):
 		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
 	PRTY = None # PRTY
-	@lineage(dependencies={"PRTY.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.PRTY.DFLT_STTS
-	@lineage(dependencies={"PRTY.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.PRTY.PRFRMNG_STTS
 	@lineage(dependencies={"PRTY.INSTTNL_SCTR_EBA_ITS"})
 	def INSTTTNL_SCTR(self):
 		return self.PRTY.INSTTNL_SCTR_EBA_ITS
-	@lineage(dependencies={"PRTY.INSTTNL_SCTR_SHS"})
-	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTNL_SCTR_SHS
-	@lineage(dependencies={"PRTY.INSTTTNL_SCTR"})
-	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTTNL_SCTR
 	@lineage(dependencies={"PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR"})
 	def MLTLTRL_DVLPMNT_BNK_INDCTR(self):
 		return self.PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR
@@ -492,45 +351,14 @@ class Trade_receivables(F_07_01_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"CLLTRL.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.CLLTRL.CRRYNG_AMNT
-	@lineage(dependencies={"CLLTRL.TYP_CLLTRL"})
-	def TYP_CLLTRL(self):
-		return self.CLLTRL.TYP_CLLTRL
 	CRDT_FCLTY = None # CRDT_FCLTY
-	@lineage(dependencies={"CRDT_FCLTY.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.CRDT_FCLTY.ACCNTNG_CLSSFCTN
-	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.DFLT_STTS
-	@lineage(dependencies={"CRDT_FCLTY.DFLT_STTS_DRVD"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.DFLT_STTS_DRVD
 	@lineage(dependencies={"CRDT_FCLTY.IMPRMNT_STTS"})
 	def IMPRMNT_STTS(self):
 		return self.CRDT_FCLTY.IMPRMNT_STTS
-	@lineage(dependencies={"CRDT_FCLTY.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.CRDT_FCLTY.PRFRMNG_STTS
-	ENTTY_RL = None # ENTTY_RL
-	@lineage(dependencies={"ENTTY_RL.ENTTY_GRP_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_GRP_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.ENTTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.ENTTY_TRNSCTN_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_TRNSCTN_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.PRTY_RL_TYP
 	INSTRMNT = None # INSTRMNT
 	@lineage(dependencies={"INSTRMNT.RPYMNT_RGHTS"})
 	def RPYMNT_RGHTS(self):
 		return self.INSTRMNT.RPYMNT_RGHTS
-	@lineage(dependencies={"INSTRMNT.INSTRMNT_TYP_ORGN"})
-	def TYP_INSTRMNT(self):
-		return self.INSTRMNT.INSTRMNT_TYP_ORGN
 	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
 	def TYP_INSTRMNT(self):
 		return self.INSTRMNT.TYP_INSTRMNT
@@ -538,34 +366,10 @@ class Trade_receivables(F_07_01_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR"})
 	def MN_DBTR_INDCTR(self):
 		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR
-	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP
 	INSTRMNT_RL = None # INSTRMNT_RL
-	@lineage(dependencies={"INSTRMNT_RL.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.INSTRMNT_RL.ACCNTNG_CLSSFCTN
 	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.INSTRMNT_RL.CRRYNG_AMNT
-	@lineage(dependencies={"INSTRMNT_RL.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.INSTRMNT_RL.HLD_SL_INDCTR
-	@lineage(dependencies={"INSTRMNT_RL.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.DFLT_STTS
-	@lineage(dependencies={"INSTRMNT_RL.DFLT_STTS_DRVD"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.DFLT_STTS_DRVD
-	@lineage(dependencies={"INSTRMNT_RL.IMPRMNT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.IMPRMNT_STTS
-	@lineage(dependencies={"INSTRMNT_RL.INTL_IMPRMNT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.INTL_IMPRMNT_STTS
-	@lineage(dependencies={"INSTRMNT_RL.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.INSTRMNT_RL.PRFRMNG_STTS
 	@lineage(dependencies={"INSTRMNT_RL.PRJCT_FNNC_LN"})
 	def PRJCT_FNNC_LN(self):
 		return self.INSTRMNT_RL.PRJCT_FNNC_LN
@@ -576,21 +380,9 @@ class Trade_receivables(F_07_01_REF_FINREP_3_0_Base):
 	def SBJCT_IMPRMNT_INDCTR(self):
 		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
 	PRTY = None # PRTY
-	@lineage(dependencies={"PRTY.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.PRTY.DFLT_STTS
-	@lineage(dependencies={"PRTY.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.PRTY.PRFRMNG_STTS
 	@lineage(dependencies={"PRTY.INSTTNL_SCTR_EBA_ITS"})
 	def INSTTTNL_SCTR(self):
 		return self.PRTY.INSTTNL_SCTR_EBA_ITS
-	@lineage(dependencies={"PRTY.INSTTNL_SCTR_SHS"})
-	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTNL_SCTR_SHS
-	@lineage(dependencies={"PRTY.INSTTTNL_SCTR"})
-	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTTNL_SCTR
 	@lineage(dependencies={"PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR"})
 	def MLTLTRL_DVLPMNT_BNK_INDCTR(self):
 		return self.PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR
@@ -599,27 +391,87 @@ class Trade_receivables(F_07_01_REF_FINREP_3_0_Base):
 	def NGTBL_SCRTY_INDCTR(self):
 		return self.SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR
 
-class Non_Negotiable_bonds(F_07_01_REF_FINREP_3_0_Base):
-	ENTTY_RL = None # ENTTY_RL
-	@lineage(dependencies={"ENTTY_RL.ENTTY_GRP_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_GRP_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.ENTTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.ENTTY_TRNSCTN_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.ENTTY_TRNSCTN_RL_TYP
-	@lineage(dependencies={"ENTTY_RL.PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.ENTTY_RL.PRTY_RL_TYP
-	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT.IMPRMNT_STTS"})
+class On_demand_and_short_notice(F_07_01_REF_FINREP_3_0_Base):
+	CRDT_FCLTY = None # CRDT_FCLTY
+	@lineage(dependencies={"CRDT_FCLTY.IMPRMNT_STTS"})
 	def IMPRMNT_STTS(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT.IMPRMNT_STTS
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT.INVSTR_PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT.INVSTR_PRTY_RL_TYP
+		return self.CRDT_FCLTY.IMPRMNT_STTS
+	INSTRMNT = None # INSTRMNT
+	@lineage(dependencies={"INSTRMNT.RPYMNT_RGHTS"})
+	def RPYMNT_RGHTS(self):
+		return self.INSTRMNT.RPYMNT_RGHTS
+	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
+	def TYP_INSTRMNT(self):
+		return self.INSTRMNT.TYP_INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT = None # INSTRMNT_ENTTY_RL_ASSGNMNT
+	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR"})
+	def MN_DBTR_INDCTR(self):
+		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR
+	INSTRMNT_RL = None # INSTRMNT_RL
+	@lineage(dependencies={"INSTRMNT_RL.ACCNTNG_CLSSFCTN"})
+	def ACCNTNG_CLSSFCTN(self):
+		return self.INSTRMNT_RL.ACCNTNG_CLSSFCTN
+	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
+	def CRRYNG_AMNT(self):
+		return self.INSTRMNT_RL.CRRYNG_AMNT
+	@lineage(dependencies={"INSTRMNT_RL.HLD_SL_INDCTR"})
+	def HLD_SL_INDCTR(self):
+		return self.INSTRMNT_RL.HLD_SL_INDCTR
+	@lineage(dependencies={"INSTRMNT_RL.PRJCT_FNNC_LN"})
+	def PRJCT_FNNC_LN(self):
+		return self.INSTRMNT_RL.PRJCT_FNNC_LN
+	@lineage(dependencies={"INSTRMNT_RL.PRPS"})
+	def PRPS(self):
+		return self.INSTRMNT_RL.PRPS
+	@lineage(dependencies={"INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR"})
+	def SBJCT_IMPRMNT_INDCTR(self):
+		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
+	PRTY = None # PRTY
+	@lineage(dependencies={"PRTY.INSTTNL_SCTR_EBA_ITS"})
+	def INSTTTNL_SCTR(self):
+		return self.PRTY.INSTTNL_SCTR_EBA_ITS
+	@lineage(dependencies={"PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR"})
+	def MLTLTRL_DVLPMNT_BNK_INDCTR(self):
+		return self.PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR
+
+class Reverse_repurchase_agreements(F_07_01_REF_FINREP_3_0_Base):
+	CRDT_FCLTY = None # CRDT_FCLTY
+	@lineage(dependencies={"CRDT_FCLTY.IMPRMNT_STTS"})
+	def IMPRMNT_STTS(self):
+		return self.CRDT_FCLTY.IMPRMNT_STTS
+	INSTRMNT = None # INSTRMNT
+	@lineage(dependencies={"INSTRMNT.RPYMNT_RGHTS"})
+	def RPYMNT_RGHTS(self):
+		return self.INSTRMNT.RPYMNT_RGHTS
+	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
+	def TYP_INSTRMNT(self):
+		return self.INSTRMNT.TYP_INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT = None # INSTRMNT_ENTTY_RL_ASSGNMNT
+	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR"})
+	def MN_DBTR_INDCTR(self):
+		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR
+	INSTRMNT_RL = None # INSTRMNT_RL
+	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
+	def CRRYNG_AMNT(self):
+		return self.INSTRMNT_RL.CRRYNG_AMNT
+	@lineage(dependencies={"INSTRMNT_RL.PRJCT_FNNC_LN"})
+	def PRJCT_FNNC_LN(self):
+		return self.INSTRMNT_RL.PRJCT_FNNC_LN
+	@lineage(dependencies={"INSTRMNT_RL.PRPS"})
+	def PRPS(self):
+		return self.INSTRMNT_RL.PRPS
+	@lineage(dependencies={"INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR"})
+	def SBJCT_IMPRMNT_INDCTR(self):
+		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
+	PRTY = None # PRTY
+	@lineage(dependencies={"PRTY.INSTTNL_SCTR_EBA_ITS"})
+	def INSTTTNL_SCTR(self):
+		return self.PRTY.INSTTNL_SCTR_EBA_ITS
+	@lineage(dependencies={"PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR"})
+	def MLTLTRL_DVLPMNT_BNK_INDCTR(self):
+		return self.PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR
+
+class Non_Negotiable_bonds(F_07_01_REF_FINREP_3_0_Base):
 	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT
 	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.ACCNTNG_CLSSFCTN"})
 	def ACCNTNG_CLSSFCTN(self):
@@ -627,37 +479,10 @@ class Non_Negotiable_bonds(F_07_01_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.CRRYNG_AMNT
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.HLD_SL_INDCTR
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.IMPRMNT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.IMPRMNT_STTS
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.INTL_IMPRMNT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.INTL_IMPRMNT_STTS
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.INVSTR_PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.INVSTR_PRTY_RL_TYP
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.SBJCT_IMPRMNT_INDCTR"})
-	def SBJCT_IMPRMNT_INDCTR(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.SBJCT_IMPRMNT_INDCTR
 	PRTY = None # PRTY
-	@lineage(dependencies={"PRTY.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.PRTY.DFLT_STTS
-	@lineage(dependencies={"PRTY.PRFRMNG_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.PRTY.PRFRMNG_STTS
 	@lineage(dependencies={"PRTY.INSTTNL_SCTR_EBA_ITS"})
 	def INSTTTNL_SCTR(self):
 		return self.PRTY.INSTTNL_SCTR_EBA_ITS
-	@lineage(dependencies={"PRTY.INSTTNL_SCTR_SHS"})
-	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTNL_SCTR_SHS
-	@lineage(dependencies={"PRTY.INSTTTNL_SCTR"})
-	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTTNL_SCTR
 	@lineage(dependencies={"PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR"})
 	def MLTLTRL_DVLPMNT_BNK_INDCTR(self):
 		return self.PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR
@@ -669,20 +494,33 @@ class Non_Negotiable_bonds(F_07_01_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"SCRTY_PSTN.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.SCRTY_PSTN.CRRYNG_AMNT
-	@lineage(dependencies={"SCRTY_PSTN.DFLT_STTS"})
-	def IMPRMNT_STTS(self):
-		return self.SCRTY_PSTN.DFLT_STTS
-	@lineage(dependencies={"SCRTY_PSTN.DFLT_STTS_DRVD"})
-	def IMPRMNT_STTS(self):
-		return self.SCRTY_PSTN.DFLT_STTS_DRVD
-	@lineage(dependencies={"SCRTY_PSTN.INVSTR_PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.SCRTY_PSTN.INVSTR_PRTY_RL_TYP
+
+class F_07_01_REF_FINREP_3_0_Advances_that_are_not_loans_Table:
+	CLLTRL_Table = None # CLLTRL
+	CRDT_FCLTY_Table = None # CRDT_FCLTY
+	INSTRMNT_Table = None # INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT_Table = None # INSTRMNT_ENTTY_RL_ASSGNMNT
+	INSTRMNT_RL_Table = None # INSTRMNT_RL
+	PRTY_Table = None # PRTY
+	SCRTY_EXCHNG_TRDBL_DRVTV_Table = None # SCRTY_EXCHNG_TRDBL_DRVTV
+	Advances_that_are_not_loanss = []# Advances_that_are_not_loans[]
+	def calc_Advances_that_are_not_loanss(self) :
+		items = [] # Advances_that_are_not_loans[
+		# Join up any refered tables that you need to join
+		# loop through the main table
+		# set any references you want to on the new Item so that it can refer to themin operations
+		return items
+	def init(self):
+		Orchestration().init(self)
+		self.Advances_that_are_not_loanss = []
+		self.Advances_that_are_not_loanss.extend(self.calc_Advances_that_are_not_loanss())
+		CSVConverter.persist_object_as_csv(self,True)
+		return None
+
 
 class F_07_01_REF_FINREP_3_0_Credit_card_debt_Table:
 	CLLTRL_Table = None # CLLTRL
 	CRDT_FCLTY_Table = None # CRDT_FCLTY
-	ENTTY_RL_Table = None # ENTTY_RL
 	INSTRMNT_Table = None # INSTRMNT
 	INSTRMNT_ENTTY_RL_ASSGNMNT_Table = None # INSTRMNT_ENTTY_RL_ASSGNMNT
 	INSTRMNT_RL_Table = None # INSTRMNT_RL
@@ -706,7 +544,6 @@ class F_07_01_REF_FINREP_3_0_Credit_card_debt_Table:
 class F_07_01_REF_FINREP_3_0_Finance_leases_Table:
 	CLLTRL_Table = None # CLLTRL
 	CRDT_FCLTY_Table = None # CRDT_FCLTY
-	ENTTY_RL_Table = None # ENTTY_RL
 	INSTRMNT_Table = None # INSTRMNT
 	INSTRMNT_ENTTY_RL_ASSGNMNT_Table = None # INSTRMNT_ENTTY_RL_ASSGNMNT
 	INSTRMNT_RL_Table = None # INSTRMNT_RL
@@ -730,7 +567,6 @@ class F_07_01_REF_FINREP_3_0_Finance_leases_Table:
 class F_07_01_REF_FINREP_3_0_Other_loans_Table:
 	CLLTRL_Table = None # CLLTRL
 	CRDT_FCLTY_Table = None # CRDT_FCLTY
-	ENTTY_RL_Table = None # ENTTY_RL
 	INSTRMNT_Table = None # INSTRMNT
 	INSTRMNT_ENTTY_RL_ASSGNMNT_Table = None # INSTRMNT_ENTTY_RL_ASSGNMNT
 	INSTRMNT_RL_Table = None # INSTRMNT_RL
@@ -754,7 +590,6 @@ class F_07_01_REF_FINREP_3_0_Other_loans_Table:
 class F_07_01_REF_FINREP_3_0_Trade_receivables_Table:
 	CLLTRL_Table = None # CLLTRL
 	CRDT_FCLTY_Table = None # CRDT_FCLTY
-	ENTTY_RL_Table = None # ENTTY_RL
 	INSTRMNT_Table = None # INSTRMNT
 	INSTRMNT_ENTTY_RL_ASSGNMNT_Table = None # INSTRMNT_ENTTY_RL_ASSGNMNT
 	INSTRMNT_RL_Table = None # INSTRMNT_RL
@@ -775,9 +610,49 @@ class F_07_01_REF_FINREP_3_0_Trade_receivables_Table:
 		return None
 
 
+class F_07_01_REF_FINREP_3_0_On_demand_and_short_notice_Table:
+	CRDT_FCLTY_Table = None # CRDT_FCLTY
+	INSTRMNT_Table = None # INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT_Table = None # INSTRMNT_ENTTY_RL_ASSGNMNT
+	INSTRMNT_RL_Table = None # INSTRMNT_RL
+	PRTY_Table = None # PRTY
+	On_demand_and_short_notices = []# On_demand_and_short_notice[]
+	def calc_On_demand_and_short_notices(self) :
+		items = [] # On_demand_and_short_notice[
+		# Join up any refered tables that you need to join
+		# loop through the main table
+		# set any references you want to on the new Item so that it can refer to themin operations
+		return items
+	def init(self):
+		Orchestration().init(self)
+		self.On_demand_and_short_notices = []
+		self.On_demand_and_short_notices.extend(self.calc_On_demand_and_short_notices())
+		CSVConverter.persist_object_as_csv(self,True)
+		return None
+
+
+class F_07_01_REF_FINREP_3_0_Reverse_repurchase_agreements_Table:
+	CRDT_FCLTY_Table = None # CRDT_FCLTY
+	INSTRMNT_Table = None # INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT_Table = None # INSTRMNT_ENTTY_RL_ASSGNMNT
+	INSTRMNT_RL_Table = None # INSTRMNT_RL
+	PRTY_Table = None # PRTY
+	Reverse_repurchase_agreementss = []# Reverse_repurchase_agreements[]
+	def calc_Reverse_repurchase_agreementss(self) :
+		items = [] # Reverse_repurchase_agreements[
+		# Join up any refered tables that you need to join
+		# loop through the main table
+		# set any references you want to on the new Item so that it can refer to themin operations
+		return items
+	def init(self):
+		Orchestration().init(self)
+		self.Reverse_repurchase_agreementss = []
+		self.Reverse_repurchase_agreementss.extend(self.calc_Reverse_repurchase_agreementss())
+		CSVConverter.persist_object_as_csv(self,True)
+		return None
+
+
 class F_07_01_REF_FINREP_3_0_Non_Negotiable_bonds_Table:
-	ENTTY_RL_Table = None # ENTTY_RL
-	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_Table = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT
 	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT_Table = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT
 	PRTY_Table = None # PRTY
 	SCRTY_EXCHNG_TRDBL_DRVTV_Table = None # SCRTY_EXCHNG_TRDBL_DRVTV

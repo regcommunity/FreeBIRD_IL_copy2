@@ -112,13 +112,20 @@ class F_05_01_REF_FINREP_3_0_Base:
 
 class F_05_01_REF_FINREP_3_0_UnionTable :
 	F_05_01_REF_FINREP_3_0_UnionItems = [] # F_05_01_REF_FINREP_3_0_UnionItem []
+	F_05_01_REF_FINREP_3_0_Advances_that_are_not_loans_Table = None # Advances_that_are_not_loans
 	F_05_01_REF_FINREP_3_0_Credit_card_debt_Table = None # Credit_card_debt
 	F_05_01_REF_FINREP_3_0_Finance_leases_Table = None # Finance_leases
 	F_05_01_REF_FINREP_3_0_Other_loans_Table = None # Other_loans
 	F_05_01_REF_FINREP_3_0_Trade_receivables_Table = None # Trade_receivables
+	F_05_01_REF_FINREP_3_0_On_demand_and_short_notice_Table = None # On_demand_and_short_notice
+	F_05_01_REF_FINREP_3_0_Reverse_repurchase_agreements_Table = None # Reverse_repurchase_agreements
 	F_05_01_REF_FINREP_3_0_Non_Negotiable_bonds_Table = None # Non_Negotiable_bonds
 	def calc_F_05_01_REF_FINREP_3_0_UnionItems(self) -> list[F_05_01_REF_FINREP_3_0_UnionItem] :
 		items = [] # F_05_01_REF_FINREP_3_0_UnionItem []
+		for item in self.F_05_01_REF_FINREP_3_0_Advances_that_are_not_loans_Table.Advances_that_are_not_loanss:
+			newItem = F_05_01_REF_FINREP_3_0_UnionItem()
+			newItem.base = item
+			items.append(newItem)
 		for item in self.F_05_01_REF_FINREP_3_0_Credit_card_debt_Table.Credit_card_debts:
 			newItem = F_05_01_REF_FINREP_3_0_UnionItem()
 			newItem.base = item
@@ -135,6 +142,14 @@ class F_05_01_REF_FINREP_3_0_UnionTable :
 			newItem = F_05_01_REF_FINREP_3_0_UnionItem()
 			newItem.base = item
 			items.append(newItem)
+		for item in self.F_05_01_REF_FINREP_3_0_On_demand_and_short_notice_Table.On_demand_and_short_notices:
+			newItem = F_05_01_REF_FINREP_3_0_UnionItem()
+			newItem.base = item
+			items.append(newItem)
+		for item in self.F_05_01_REF_FINREP_3_0_Reverse_repurchase_agreements_Table.Reverse_repurchase_agreementss:
+			newItem = F_05_01_REF_FINREP_3_0_UnionItem()
+			newItem.base = item
+			items.append(newItem)
 		for item in self.F_05_01_REF_FINREP_3_0_Non_Negotiable_bonds_Table.Non_Negotiable_bondss:
 			newItem = F_05_01_REF_FINREP_3_0_UnionItem()
 			newItem.base = item
@@ -148,6 +163,57 @@ class F_05_01_REF_FINREP_3_0_UnionTable :
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
+class Advances_that_are_not_loans(F_05_01_REF_FINREP_3_0_Base):
+	def TYP_CLLTRL(self):
+		return '0'
+	INSTRMNT = None # INSTRMNT
+	def NGTBL_SCRTY_INDCTR(self):
+		''' return string from NGTBL_SCRTY enumeration of 2 for non-negotiable '''
+		return '2'
+	def RPYMNT_RGHTS(self):
+		''' return string from RPYMNT_RGHTS enumeration of 2 fro Other_than_on_demand_or_short_notice'''
+		return '2'	
+	def MN_DBTR_INDCTR(self):
+		# return 1 for main debtor
+		return '1'
+	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
+	def TYP_INSTRMNT(self):
+		return self.INSTRMNT.TYP_INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT = None # INSTRMNT_ENTTY_RL_ASSGNMNT
+	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP"})
+	def PRTY_RL_TYP(self):
+		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP
+	INSTRMNT_RL = None # INSTRMNT_RL
+	@lineage(dependencies={"INSTRMNT_RL.ACCNTNG_CLSSFCTN"})
+	def ACCNTNG_CLSSFCTN(self):
+		return self.INSTRMNT_RL.ACCNTNG_CLSSFCTN
+	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
+	def CRRYNG_AMNT(self):
+		return self.INSTRMNT_RL.CRRYNG_AMNT
+	@lineage(dependencies={"INSTRMNT_RL.GRSS_CRRYNG_AMNT"})
+	def GRSS_CRRYNG_AMNT(self):
+		return self.INSTRMNT_RL.GRSS_CRRYNG_AMNT
+	@lineage(dependencies={"INSTRMNT_RL.HLD_SL_INDCTR"})
+	def HLD_SL_INDCTR(self):
+		return self.INSTRMNT_RL.HLD_SL_INDCTR
+	@lineage(dependencies={"INSTRMNT_RL.PRJCT_FNNC_LN"})
+	def PRJCT_FNNC_LN(self):
+		return self.INSTRMNT_RL.PRJCT_FNNC_LN
+	@lineage(dependencies={"INSTRMNT_RL.PRPS"})
+	def PRPS(self):
+		return self.INSTRMNT_RL.PRPS
+	@lineage(dependencies={"INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR"})
+	def SBJCT_IMPRMNT_INDCTR(self):
+		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
+	PRTY = None # PRTY
+	@lineage(dependencies={"PRTY.INSTTTNL_SCTR"})
+	def INSTTTNL_SCTR(self):
+		return self.PRTY.INSTTTNL_SCTR
+	@lineage(dependencies={"PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR"})
+	def MLTLTRL_DVLPMNT_BNK_INDCTR(self):
+		return self.PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR
+	pass
+
 
 class Credit_card_debt(F_05_01_REF_FINREP_3_0_Base):
 	CLLTRL = None # CLLTRL
@@ -156,8 +222,6 @@ class Credit_card_debt(F_05_01_REF_FINREP_3_0_Base):
 		if self.CLLTRL is not None:
 			return self.CLLTRL.TYP_CLLTRL
 		return '0'
-	pass
-	pass
 	INSTRMNT = None # INSTRMNT
 	def NGTBL_SCRTY_INDCTR(self):
 		''' return string from NGTBL_SCRTY enumeration of 2 for non-negotiable '''
@@ -372,7 +436,107 @@ class Trade_receivables(F_05_01_REF_FINREP_3_0_Base):
 	def MLTLTRL_DVLPMNT_BNK_INDCTR(self):
 		return self.PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR
 
-
+class On_demand_and_short_notice(F_05_01_REF_FINREP_3_0_Base):
+	def TYP_CLLTRL(self):
+		return '0'
+	INSTRMNT = None # INSTRMNT
+	@lineage(dependencies={"INSTRMNT.RPYMNT_RGHTS"})
+	def RPYMNT_RGHTS(self):
+		return self.INSTRMNT.RPYMNT_RGHTS
+	def NGTBL_SCRTY_INDCTR(self):
+		''' return string from NGTBL_SCRTY enumeration of 2 for non-negotiable '''
+		return '2'
+	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
+	def TYP_INSTRMNT(self):
+		return self.INSTRMNT.TYP_INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT = None # INSTRMNT_ENTTY_RL_ASSGNMNT	
+	def MN_DBTR_INDCTR(self):
+		# return 1 for main debtor
+		return '1'
+	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP"})
+	def PRTY_RL_TYP(self):
+		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP
+	INSTRMNT_RL = None # INSTRMNT_RL
+	@lineage(dependencies={"INSTRMNT_RL.ACCNTNG_CLSSFCTN"})
+	def ACCNTNG_CLSSFCTN(self):
+		return self.INSTRMNT_RL.ACCNTNG_CLSSFCTN
+	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
+	def CRRYNG_AMNT(self):
+		return self.INSTRMNT_RL.CRRYNG_AMNT
+	@lineage(dependencies={"INSTRMNT_RL.GRSS_CRRYNG_AMNT"})
+	def GRSS_CRRYNG_AMNT(self):
+		return self.INSTRMNT_RL.GRSS_CRRYNG_AMNT
+	@lineage(dependencies={"INSTRMNT_RL.HLD_SL_INDCTR"})
+	def HLD_SL_INDCTR(self):
+		return self.INSTRMNT_RL.HLD_SL_INDCTR
+	@lineage(dependencies={"INSTRMNT_RL.PRJCT_FNNC_LN"})
+	def PRJCT_FNNC_LN(self):
+		return self.INSTRMNT_RL.PRJCT_FNNC_LN
+	@lineage(dependencies={"INSTRMNT_RL.PRPS"})
+	def PRPS(self):
+		return self.INSTRMNT_RL.PRPS
+	@lineage(dependencies={"INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR"})
+	def SBJCT_IMPRMNT_INDCTR(self):
+		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
+	PRTY = None # PRTY
+	@lineage(dependencies={"PRTY.INSTTTNL_SCTR"})
+	def INSTTTNL_SCTR(self):
+		return self.PRTY.INSTTTNL_SCTR
+	@lineage(dependencies={"PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR"})
+	def MLTLTRL_DVLPMNT_BNK_INDCTR(self):
+		return self.PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR
+	
+class Reverse_repurchase_agreements(F_05_01_REF_FINREP_3_0_Base):
+	def TYP_CLLTRL(self):
+		return '0'
+	INSTRMNT = None # INSTRMNT
+	def NGTBL_SCRTY_INDCTR(self):
+		''' return string from NGTBL_SCRTY enumeration of 2 for non-negotiable '''
+		return '2'
+	INSTRMNT = None # INSTRMNT
+	def RPYMNT_RGHTS(self):
+		''' return string from RPYMNT_RGHTS enumeration of 2 fro Other_than_on_demand_or_short_notice'''
+		return '2'
+	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
+	def TYP_INSTRMNT(self):
+		return self.INSTRMNT.TYP_INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT = None # INSTRMNT_ENTTY_RL_ASSGNMNT
+	def MN_DBTR_INDCTR(self):
+		# return 1 for main debtor
+		return '1'
+	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP"})
+	def PRTY_RL_TYP(self):
+		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP
+	INSTRMNT_RL = None # INSTRMNT_RL
+	@lineage(dependencies={"INSTRMNT_RL.ACCNTNG_CLSSFCTN"})
+	def ACCNTNG_CLSSFCTN(self):
+		return self.INSTRMNT_RL.ACCNTNG_CLSSFCTN
+	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
+	def CRRYNG_AMNT(self):
+		return self.INSTRMNT_RL.CRRYNG_AMNT
+	@lineage(dependencies={"INSTRMNT_RL.GRSS_CRRYNG_AMNT"})
+	def GRSS_CRRYNG_AMNT(self):
+		return self.INSTRMNT_RL.GRSS_CRRYNG_AMNT
+	@lineage(dependencies={"INSTRMNT_RL.HLD_SL_INDCTR"})
+	def HLD_SL_INDCTR(self):
+		return self.INSTRMNT_RL.HLD_SL_INDCTR
+	@lineage(dependencies={"INSTRMNT_RL.PRJCT_FNNC_LN"})
+	def PRJCT_FNNC_LN(self):
+		return self.INSTRMNT_RL.PRJCT_FNNC_LN
+	@lineage(dependencies={"INSTRMNT_RL.PRPS"})
+	def PRPS(self):
+		return self.INSTRMNT_RL.PRPS
+	@lineage(dependencies={"INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR"})
+	def SBJCT_IMPRMNT_INDCTR(self):
+		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
+	PRTY = None # PRTY
+	@lineage(dependencies={"PRTY.INSTTTNL_SCTR"})
+	def INSTTTNL_SCTR(self):
+		return self.PRTY.INSTTTNL_SCTR
+	@lineage(dependencies={"PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR"})
+	def MLTLTRL_DVLPMNT_BNK_INDCTR(self):
+		return self.PRTY.MLTLTRL_DVLPMNT_BNK_INDCTR
+	
 class Non_Negotiable_bonds(F_05_01_REF_FINREP_3_0_Base):
 	def PRPS(self):
 		return '19'
@@ -420,6 +584,44 @@ class Non_Negotiable_bonds(F_05_01_REF_FINREP_3_0_Base):
 	def NGTBL_SCRTY_INDCTR(self):
 		return self.SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR
 	pass
+
+class F_05_01_REF_FINREP_3_0_Advances_that_are_not_loans_Table:
+	INSTRMNT_Table = None # INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT_Table = None # INSTRMNT_ENTTY_RL_ASSGNMNT
+	INSTRMNT_RL_Table = None # INSTRMNT_RL
+	PRTY_Table = None # PRTY
+	Advances_that_are_not_loanss = []# Advances_that_are_not_loans[]
+	def calc_Advances_that_are_not_loanss(self) :
+		items = [] # 
+		# Join up any refered tables that you need to join
+		# loop through the main table
+		# set any references you want to on the new Item so that it can refer to themin operations
+		
+		for instrmnt_rl in self.INSTRMNT_RL_Table:
+			typeInst = instrmnt_rl.theINSTRMNT.TYP_INSTRMNT
+
+			if (typeInst == '130') or (typeInst == '120') or (typeInst == '140'):
+				
+				newItem = Advances_that_are_not_loans()
+				newItem.INSTRMNT_RL = instrmnt_rl
+				newItem.INSTRMNT = instrmnt_rl.theINSTRMNT
+				
+				for era in  self.INSTRMNT_ENTTY_RL_ASSGNMNT_Table:
+					inst = era.theINSTRMNT
+					if (inst == newItem.INSTRMNT):
+						newItem.INSTRMNT_ENTTY_RL_ASSGNMNT = era
+						er = era.theENTTY_RL
+						newItem.PRTY = er.thePRTY
+					
+				items.append(newItem)
+	
+		return items
+	def init(self):
+		Orchestration().init(self)
+		self.Advances_that_are_not_loanss = []
+		self.Advances_that_are_not_loanss.extend(self.calc_Advances_that_are_not_loanss())
+		CSVConverter.persist_object_as_csv(self,True)
+		return None
 
 
 class F_05_01_REF_FINREP_3_0_Credit_card_debt_Table:
@@ -607,7 +809,81 @@ class F_05_01_REF_FINREP_3_0_Trade_receivables_Table:
 		self.Trade_receivabless.extend(self.calc_Trade_receivabless())
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
+
+class F_05_01_REF_FINREP_3_0_On_demand_and_short_notice_Table:
+	INSTRMNT_Table = None # INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT_Table = None # INSTRMNT_ENTTY_RL_ASSGNMNT
+	INSTRMNT_RL_Table = None # INSTRMNT_RL
+	PRTY_Table = None # PRTY
+	On_demand_and_short_notices = []# On_demand_and_short_notice[]
+	def calc_On_demand_and_short_notices(self) :
+		items = [] # On_demand_and_short_notice
+		# Join up any refered tables that you need to join
+		# loop through the main table
+		# set any references you want to on the new Item so that it can refer to themin operations
+		
+		for instrmnt_rl in self.INSTRMNT_RL_Table:
+			typeInst = instrmnt_rl.theINSTRMNT.TYP_INSTRMNT
+			if (typeInst == '511' ) or (typeInst == '522' ):
+				newItem = On_demand_and_short_notice()
+				newItem.INSTRMNT_RL = instrmnt_rl
+				newItem.INSTRMNT = instrmnt_rl.theINSTRMNT
+				
+				for era in  self.INSTRMNT_ENTTY_RL_ASSGNMNT_Table:
+					inst = era.theINSTRMNT
+					if (inst == newItem.INSTRMNT):
+						newItem.INSTRMNT_ENTTY_RL_ASSGNMNT = era
+						er = era.theENTTY_RL
+						newItem.PRTY = er.thePRTY
+					
+				items.append(newItem)
 	
+		return items
+	def init(self):
+		Orchestration().init(self)
+		self.On_demand_and_short_notices = []
+		self.On_demand_and_short_notices.extend(self.calc_On_demand_and_short_notices())
+		CSVConverter.persist_object_as_csv(self,True)
+		return None
+
+
+class F_05_01_REF_FINREP_3_0_Reverse_repurchase_agreements_Table:
+	INSTRMNT_Table = None # INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT_Table = None # INSTRMNT_ENTTY_RL_ASSGNMNT
+	INSTRMNT_RL_Table = None # INSTRMNT_RL
+	PRTY_Table = None # PRTY
+	Reverse_repurchase_agreementss = []# Reverse_repurchase_agreements[]
+	def calc_Reverse_repurchase_agreementss(self) :
+		items = [] # On_demand_and_short_notice
+		# Join up any refered tables that you need to join
+		# loop through the main table
+		# set any references you want to on the new Item so that it can refer to themin operations
+		
+		for instrmnt_rl in self.INSTRMNT_RL_Table:
+			typeInst = instrmnt_rl.theINSTRMNT.TYP_INSTRMNT
+			if (typeInst == '1003' ) :
+				newItem = Reverse_repurchase_agreements()
+				newItem.INSTRMNT_RL = instrmnt_rl
+				newItem.INSTRMNT = instrmnt_rl.theINSTRMNT
+				
+				for era in  self.INSTRMNT_ENTTY_RL_ASSGNMNT_Table:
+					inst = era.theINSTRMNT
+					if (inst == newItem.INSTRMNT):
+						newItem.INSTRMNT_ENTTY_RL_ASSGNMNT = era
+						er = era.theENTTY_RL
+						newItem.PRTY = er.thePRTY
+					
+				items.append(newItem)
+	
+		return items
+	def init(self):
+		Orchestration().init(self)
+		self.Reverse_repurchase_agreementss = []
+		self.Reverse_repurchase_agreementss.extend(self.calc_Reverse_repurchase_agreementss())
+		CSVConverter.persist_object_as_csv(self,True)
+		return None
+
+
 class F_05_01_REF_FINREP_3_0_Non_Negotiable_bonds_Table:
 	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT_Table = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT
 	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_Table = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT

@@ -76,27 +76,14 @@ class F_08_02_REF_FINREP_3_0_UnionTable :
 
 
 class Deposits(F_08_02_REF_FINREP_3_0_Base):
-	CRDT_FCLTY = None # CRDT_FCLTY
-	@lineage(dependencies={"CRDT_FCLTY.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.CRDT_FCLTY.ACCNTNG_CLSSFCTN
 	INSTRMNT = None # INSTRMNT
-	@lineage(dependencies={"INSTRMNT.INSTRMNT_TYP_ORGN"})
-	def TYP_INSTRMNT(self):
-		return self.INSTRMNT.INSTRMNT_TYP_ORGN
 	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
 	def TYP_INSTRMNT(self):
 		return self.INSTRMNT.TYP_INSTRMNT
 	INSTRMNT_RL = None # INSTRMNT_RL
-	@lineage(dependencies={"INSTRMNT_RL.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.INSTRMNT_RL.ACCNTNG_CLSSFCTN
 	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.INSTRMNT_RL.CRRYNG_AMNT
-	@lineage(dependencies={"INSTRMNT_RL.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.INSTRMNT_RL.HLD_SL_INDCTR
 	@lineage(dependencies={"INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR"})
 	def SBJCT_IMPRMNT_INDCTR(self):
 		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
@@ -105,7 +92,6 @@ class Deposits(F_08_02_REF_FINREP_3_0_Base):
 		return self.INSTRMNT_RL.SBRDNTD_DBT
 
 class F_08_02_REF_FINREP_3_0_Deposits_Table:
-	CRDT_FCLTY_Table = None # CRDT_FCLTY
 	INSTRMNT_Table = None # INSTRMNT
 	INSTRMNT_RL_Table = None # INSTRMNT_RL
 	Depositss = []# Deposits[]

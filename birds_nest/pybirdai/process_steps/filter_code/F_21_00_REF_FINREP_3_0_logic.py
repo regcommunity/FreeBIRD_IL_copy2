@@ -87,18 +87,6 @@ class Intangible_assets_other_than_Goodwill(F_21_00_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.MSRMNT_MTHD"})
-	def MSRMNT_MTHD(self):
-		return self.NN_FNNCL_ASST.MSRMNT_MTHD
-	@lineage(dependencies={"NN_FNNCL_ASST.SBJCT_OPRTNG_LS_INDCTR"})
-	def SBJCT_OPRTNG_LS_INDCTR(self):
-		return self.NN_FNNCL_ASST.SBJCT_OPRTNG_LS_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class F_21_00_REF_FINREP_3_0_Intangible_assets_other_than_Goodwill_Table:
 	NN_FNNCL_ASST_Table = None # NN_FNNCL_ASST

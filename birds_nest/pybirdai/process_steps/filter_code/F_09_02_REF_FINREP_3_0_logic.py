@@ -84,12 +84,6 @@ class Financial_guarantees_received(F_09_02_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"INSTRMNT.NMNL_AMNT"})
 	def NMNL_AMNT(self):
 		return self.INSTRMNT.NMNL_AMNT
-	@lineage(dependencies={"INSTRMNT.INSTRMNT_TYP_ORGN"})
-	def TYP_INSTRMNT(self):
-		return self.INSTRMNT.INSTRMNT_TYP_ORGN
-	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
-	def TYP_INSTRMNT(self):
-		return self.INSTRMNT.TYP_INSTRMNT
 
 class F_09_02_REF_FINREP_3_0_Financial_guarantees_received_Table:
 	CRDT_FCLTY_Table = None # CRDT_FCLTY

@@ -102,6 +102,7 @@ class F_01_01_REF_FINREP_3_0_UnionTable :
 	F_01_01_REF_FINREP_3_0_UnionItems = [] # F_01_01_REF_FINREP_3_0_UnionItem []
 	F_01_01_REF_FINREP_3_0_Other_loans_Table = None # Other_loans
 	F_01_01_REF_FINREP_3_0_Tangible_assets_Table = None # Tangible_assets
+	F_01_01_REF_FINREP_3_0_On_demand_and_short_notice_Table = None # On_demand_and_short_notice
 	F_01_01_REF_FINREP_3_0_Debt_securities_Table = None # Debt_securities
 	F_01_01_REF_FINREP_3_0_Non_Negotiable_bonds_Table = None # Non_Negotiable_bonds
 	F_01_01_REF_FINREP_3_0_Current_tax_assets_Table = None # Current_tax_assets
@@ -117,6 +118,10 @@ class F_01_01_REF_FINREP_3_0_UnionTable :
 			newItem.base = item
 			items.append(newItem)
 		for item in self.F_01_01_REF_FINREP_3_0_Tangible_assets_Table.Tangible_assetss:
+			newItem = F_01_01_REF_FINREP_3_0_UnionItem()
+			newItem.base = item
+			items.append(newItem)
+		for item in self.F_01_01_REF_FINREP_3_0_On_demand_and_short_notice_Table.On_demand_and_short_notices:
 			newItem = F_01_01_REF_FINREP_3_0_UnionItem()
 			newItem.base = item
 			items.append(newItem)
@@ -163,11 +168,14 @@ class F_01_01_REF_FINREP_3_0_UnionTable :
 
 
 class Other_loans(F_01_01_REF_FINREP_3_0_Base):
-
+	CLLTRL = None # CLLTRL
+	@lineage(dependencies={"CLLTRL.CRRYNG_AMNT"})
+	def CRRYNG_AMNT(self):
+		return self.CLLTRL.CRRYNG_AMNT
 	INSTRMNT = None # INSTRMNT
+	@lineage(dependencies={"INSTRMNT.RPYMNT_RGHTS"})
 	def RPYMNT_RGHTS(self):
-		''' return string from RPYMNT_RGHTS enumeration of 2 fro Other_than_on_demand_or_short_notice'''
-		return '2'	
+		return self.INSTRMNT.RPYMNT_RGHTS
 	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
 	def TYP_INSTRMNT(self):
 		return self.INSTRMNT.TYP_INSTRMNT
@@ -175,126 +183,73 @@ class Other_loans(F_01_01_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR"})
 	def MN_DBTR_INDCTR(self):
 		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR
-	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP
 	INSTRMNT_RL = None # INSTRMNT_RL
-	@lineage(dependencies={"INSTRMNT_RL.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.INSTRMNT_RL.ACCNTNG_CLSSFCTN
 	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.INSTRMNT_RL.CRRYNG_AMNT
-	@lineage(dependencies={"INSTRMNT_RL.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.INSTRMNT_RL.HLD_SL_INDCTR
 	@lineage(dependencies={"INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR"})
 	def SBJCT_IMPRMNT_INDCTR(self):
 		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
-	@lineage(dependencies={"INSTRMNT_RL.GRSS_CRRYNG_AMNT"})
-	def GRSS_CRRYNG_AMNT(self):
-		return self.INSTRMNT_RL.GRSS_CRRYNG_AMNT
 	PRTY = None # PRTY
-	@lineage(dependencies={"PRTY.INSTTTNL_SCTR"})
+	@lineage(dependencies={"PRTY.INSTTNL_SCTR_EBA_ITS"})
 	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTTNL_SCTR
+		return self.PRTY.INSTTNL_SCTR_EBA_ITS
 	SCRTY_EXCHNG_TRDBL_DRVTV = None # SCRTY_EXCHNG_TRDBL_DRVTV
+	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR"})
 	def NGTBL_SCRTY_INDCTR(self):
-		''' return string from NGTBL_SCRTY enumeration of 2 for non-negotiable '''
-		return '2'
-	def TYP_HDG(self) -> str:
-		''' return string from TYP_HDG enumeration '''
-		return '0'
-	def SCRTY_EXCHNG_TRDBL_DRVTV_TYP(self):
-		return '0'
-	def TYP_ACCNTNG_ITM(self):
-		return '0'
-	
+		return self.SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR
 
 class Tangible_assets(F_01_01_REF_FINREP_3_0_Base):
 	CLLTRL = None # CLLTRL
 	@lineage(dependencies={"CLLTRL.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.CLLTRL.CRRYNG_AMNT
-	CRDT_FCLTY = None # CRDT_FCLTY
-	@lineage(dependencies={"CRDT_FCLTY.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.CRDT_FCLTY.ACCNTNG_CLSSFCTN
 	INSTRMNT = None # INSTRMNT
 	@lineage(dependencies={"INSTRMNT.RPYMNT_RGHTS"})
 	def RPYMNT_RGHTS(self):
 		return self.INSTRMNT.RPYMNT_RGHTS
-	@lineage(dependencies={"INSTRMNT.INSTRMNT_TYP_ORGN"})
-	def TYP_INSTRMNT(self):
-		return self.INSTRMNT.INSTRMNT_TYP_ORGN
-	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
-	def TYP_INSTRMNT(self):
-		return self.INSTRMNT.TYP_INSTRMNT
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
+	SCRTY_EXCHNG_TRDBL_DRVTV = None # SCRTY_EXCHNG_TRDBL_DRVTV
+	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR"})
+	def NGTBL_SCRTY_INDCTR(self):
+		return self.SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR
+
+class On_demand_and_short_notice(F_01_01_REF_FINREP_3_0_Base):
+	INSTRMNT = None # INSTRMNT
+	@lineage(dependencies={"INSTRMNT.RPYMNT_RGHTS"})
+	def RPYMNT_RGHTS(self):
+		return self.INSTRMNT.RPYMNT_RGHTS
+	@lineage(dependencies={"INSTRMNT.TYP_INSTRMNT"})
+	def TYP_INSTRMNT(self):
+		return self.INSTRMNT.TYP_INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT = None # INSTRMNT_ENTTY_RL_ASSGNMNT
+	@lineage(dependencies={"INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR"})
+	def MN_DBTR_INDCTR(self):
+		return self.INSTRMNT_ENTTY_RL_ASSGNMNT.MN_DBTR_INDCTR
+	INSTRMNT_RL = None # INSTRMNT_RL
+	@lineage(dependencies={"INSTRMNT_RL.CRRYNG_AMNT"})
+	def CRRYNG_AMNT(self):
+		return self.INSTRMNT_RL.CRRYNG_AMNT
+	@lineage(dependencies={"INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR"})
+	def SBJCT_IMPRMNT_INDCTR(self):
+		return self.INSTRMNT_RL.SBJCT_IMPRMNT_INDCTR
 	PRTY = None # PRTY
 	@lineage(dependencies={"PRTY.INSTTNL_SCTR_EBA_ITS"})
 	def INSTTTNL_SCTR(self):
 		return self.PRTY.INSTTNL_SCTR_EBA_ITS
-	@lineage(dependencies={"PRTY.INSTTNL_SCTR_SHS"})
-	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTNL_SCTR_SHS
-	@lineage(dependencies={"PRTY.INSTTTNL_SCTR"})
-	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTTNL_SCTR
-	SCRTY_EXCHNG_TRDBL_DRVTV = None # SCRTY_EXCHNG_TRDBL_DRVTV
-	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR"})
-	def NGTBL_SCRTY_INDCTR(self):
-		return self.SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR
-	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.DBT_SCRTY_ACCNTNG_STNDRD"})
-	def SCRTY_EXCHNG_TRDBL_DRVTV_TYP(self):
-		return self.SCRTY_EXCHNG_TRDBL_DRVTV.DBT_SCRTY_ACCNTNG_STNDRD
-	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.DBT_SCRTY_PRFRMNG_STTS_TYP"})
-	def SCRTY_EXCHNG_TRDBL_DRVTV_TYP(self):
-		return self.SCRTY_EXCHNG_TRDBL_DRVTV.DBT_SCRTY_PRFRMNG_STTS_TYP
-	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.PRPTL_DBT_SCRTY_INDCTR"})
-	def SCRTY_EXCHNG_TRDBL_DRVTV_TYP(self):
-		return self.SCRTY_EXCHNG_TRDBL_DRVTV.PRPTL_DBT_SCRTY_INDCTR
-	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.SCRTY_TYP_BY_IDNTFR"})
-	def SCRTY_EXCHNG_TRDBL_DRVTV_TYP(self):
-		return self.SCRTY_EXCHNG_TRDBL_DRVTV.SCRTY_TYP_BY_IDNTFR
-	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.TYP_SCRTY_EXCHNG_TRDBL_DRVTV"})
-	def SCRTY_EXCHNG_TRDBL_DRVTV_TYP(self):
-		return self.SCRTY_EXCHNG_TRDBL_DRVTV.TYP_SCRTY_EXCHNG_TRDBL_DRVTV
 
 class Debt_securities(F_01_01_REF_FINREP_3_0_Base):
-	def MN_DBTR_INDCTR(self):
-		# return 1 for main debtor
-		return '1'
 	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.ACCNTNG_CLSSFCTN
 	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.CRRYNG_AMNT
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.HLD_SL_INDCTR
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.SBJCT_IMPRMNT_INDCTR"})
-	def SBJCT_IMPRMNT_INDCTR(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.SBJCT_IMPRMNT_INDCTR
 	PRTY = None # PRTY
-	@lineage(dependencies={"PRTY.INSTTTNL_SCTR"})
+	@lineage(dependencies={"PRTY.INSTTNL_SCTR_EBA_ITS"})
 	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTTNL_SCTR
-	SCRTY_ENTTY_RL_ASSGNMNT = None # SCRTY_ENTTY_RL_ASSGNMNT
-	@lineage(dependencies={"SCRTY_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.SCRTY_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP
+		return self.PRTY.INSTTNL_SCTR_EBA_ITS
 	SCRTY_EXCHNG_TRDBL_DRVTV = None # SCRTY_EXCHNG_TRDBL_DRVTV
 	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR"})
 	def NGTBL_SCRTY_INDCTR(self):
@@ -302,173 +257,79 @@ class Debt_securities(F_01_01_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.TYP_SCRTY_EXCHNG_TRDBL_DRVTV"})
 	def SCRTY_EXCHNG_TRDBL_DRVTV_TYP(self):
 		return self.SCRTY_EXCHNG_TRDBL_DRVTV.TYP_SCRTY_EXCHNG_TRDBL_DRVTV
-	def TYP_HDG(self) -> str:
-		''' return string from TYP_HDG enumeration '''
-		return '0'
-	def RPYMNT_RGHTS(self):
-		''' return string from RPYMNT_RGHTS enumeration of 2 fro Other_than_on_demand_or_short_notice'''
-		return '2'
-	def TYP_INSTRMNT(self):
-		''' return string from TYP_INSTRMNT enumeration '''
-		return '210'
-	def TYP_ACCNTNG_ITM(self):
-		return '0'
+	SCRTY_PSTN = None # SCRTY_PSTN
+	@lineage(dependencies={"SCRTY_PSTN.CRRYNG_AMNT"})
+	def CRRYNG_AMNT(self):
+		return self.SCRTY_PSTN.CRRYNG_AMNT
 
 class Non_Negotiable_bonds(F_01_01_REF_FINREP_3_0_Base):
-	def MN_DBTR_INDCTR(self):
-		# return 1 for main debtor
-		return '1'
 	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.ACCNTNG_CLSSFCTN"})
-	def ACCNTNG_CLSSFCTN(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.ACCNTNG_CLSSFCTN
 	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.CRRYNG_AMNT
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.HLD_SL_INDCTR
-	@lineage(dependencies={"LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.SBJCT_IMPRMNT_INDCTR"})
-	def SBJCT_IMPRMNT_INDCTR(self):
-		return self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT.SBJCT_IMPRMNT_INDCTR
 	PRTY = None # PRTY
-	@lineage(dependencies={"PRTY.INSTTTNL_SCTR"})
+	@lineage(dependencies={"PRTY.INSTTNL_SCTR_EBA_ITS"})
 	def INSTTTNL_SCTR(self):
-		return self.PRTY.INSTTTNL_SCTR
-	SCRTY_ENTTY_RL_ASSGNMNT = None # SCRTY_ENTTY_RL_ASSGNMNT
-	@lineage(dependencies={"SCRTY_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self):
-		return self.SCRTY_ENTTY_RL_ASSGNMNT.PRTY_RL_TYP
+		return self.PRTY.INSTTNL_SCTR_EBA_ITS
 	SCRTY_EXCHNG_TRDBL_DRVTV = None # SCRTY_EXCHNG_TRDBL_DRVTV
 	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR"})
 	def NGTBL_SCRTY_INDCTR(self):
 		return self.SCRTY_EXCHNG_TRDBL_DRVTV.NGTBL_SCRTY_INDCTR
-	@lineage(dependencies={"SCRTY_EXCHNG_TRDBL_DRVTV.TYP_SCRTY_EXCHNG_TRDBL_DRVTV"})
-	def SCRTY_EXCHNG_TRDBL_DRVTV_TYP(self):
-		return self.SCRTY_EXCHNG_TRDBL_DRVTV.TYP_SCRTY_EXCHNG_TRDBL_DRVTV
-	def TYP_HDG(self) -> str:
-		''' return string from TYP_HDG enumeration '''
-		return '0'
-	def RPYMNT_RGHTS(self):
-		''' return string from RPYMNT_RGHTS enumeration of 2 fro Other_than_on_demand_or_short_notice'''
-		return '2'
-	def TYP_INSTRMNT(self):
-		''' return string from TYP_INSTRMNT enumeration '''
-		return '1022'
-	def TYP_ACCNTNG_ITM(self):
-		return '0'
+	SCRTY_PSTN = None # SCRTY_PSTN
+	@lineage(dependencies={"SCRTY_PSTN.CRRYNG_AMNT"})
+	def CRRYNG_AMNT(self):
+		return self.SCRTY_PSTN.CRRYNG_AMNT
 
 class Current_tax_assets(F_01_01_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Deferred_tax_assets(F_01_01_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Intangible_assets(F_01_01_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Intangible_assets_Goodwill(F_01_01_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Intangible_assets_other_than_Goodwill(F_01_01_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class Tax_assets(F_01_01_REF_FINREP_3_0_Base):
 	NN_FNNCL_ASST = None # NN_FNNCL_ASST
 	@lineage(dependencies={"NN_FNNCL_ASST.CRRYNG_AMNT"})
 	def CRRYNG_AMNT(self):
 		return self.NN_FNNCL_ASST.CRRYNG_AMNT
-	@lineage(dependencies={"NN_FNNCL_ASST.HLD_SL_INDCTR"})
-	def HLD_SL_INDCTR(self):
-		return self.NN_FNNCL_ASST.HLD_SL_INDCTR
-	@lineage(dependencies={"NN_FNNCL_ASST.TYP_NN_FNNCL_ASST"})
-	def TYP_ACCNTNG_ITM(self):
-		return self.NN_FNNCL_ASST.TYP_NN_FNNCL_ASST
 
 class F_01_01_REF_FINREP_3_0_Other_loans_Table:
+	CLLTRL_Table = None # CLLTRL
 	INSTRMNT_Table = None # INSTRMNT
 	INSTRMNT_ENTTY_RL_ASSGNMNT_Table = None # INSTRMNT_ENTTY_RL_ASSGNMNT
 	INSTRMNT_RL_Table = None # INSTRMNT_RL
 	PRTY_Table = None # PRTY
 	SCRTY_EXCHNG_TRDBL_DRVTV_Table = None # SCRTY_EXCHNG_TRDBL_DRVTV
-	Other_loanss = []# Other_loans[]	
-	
+	Other_loanss = []# Other_loans[]
 	def calc_Other_loanss(self) :
 		items = [] # Other_loans[
 		# Join up any refered tables that you need to join
 		# loop through the main table
 		# set any references you want to on the new Item so that it can refer to themin operations
-		
-		for instrmnt_rl in self.INSTRMNT_RL_Table:
-			typeInst = instrmnt_rl.theINSTRMNT.TYP_INSTRMNT
-			#if (typeInst == INSTRMNT.TYP_INSTRMNT_INPT_domain['140']) or \
-			#		(typeInst == INSTRMNT.TYP_INSTRMNT_INPT_domain['1022'] ) or \
-			#	(typeInst == INSTRMNT.TYP_INSTRMNT_INPT_domain['51'] ) or \
-			#	(typeInst == INSTRMNT.TYP_INSTRMNT_INPT_domain['80'] ) or \
-			#	(typeInst == INSTRMNT.TYP_INSTRMNT_INPT_domain['12'] ) or \
-			#	(typeInst == INSTRMNT.TYP_INSTRMNT_INPT_domain['522'] ):
-			if (typeInst == '1022' ):
-				
-				newItem = Other_loans()
-				newItem.INSTRMNT_RL = instrmnt_rl
-				newItem.INSTRMNT = instrmnt_rl.theINSTRMNT
-				
-				for era in  self.INSTRMNT_ENTTY_RL_ASSGNMNT_Table:
-					inst = era.theINSTRMNT
-					if (inst == newItem.INSTRMNT):
-						newItem.INSTRMNT_ENTTY_RL_ASSGNMNT = era
-						er = era.theENTTY_RL
-						newItem.PRTY = er.thePRTY
-					
-				items.append(newItem)
-	
 		return items
-
 	def init(self):
 		Orchestration().init(self)
 		self.Other_loanss = []
@@ -476,12 +337,11 @@ class F_01_01_REF_FINREP_3_0_Other_loans_Table:
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
+
 class F_01_01_REF_FINREP_3_0_Tangible_assets_Table:
 	CLLTRL_Table = None # CLLTRL
-	CRDT_FCLTY_Table = None # CRDT_FCLTY
 	INSTRMNT_Table = None # INSTRMNT
 	NN_FNNCL_ASST_Table = None # NN_FNNCL_ASST
-	PRTY_Table = None # PRTY
 	SCRTY_EXCHNG_TRDBL_DRVTV_Table = None # SCRTY_EXCHNG_TRDBL_DRVTV
 	Tangible_assetss = []# Tangible_assets[]
 	def calc_Tangible_assetss(self) :
@@ -498,38 +358,37 @@ class F_01_01_REF_FINREP_3_0_Tangible_assets_Table:
 		return None
 
 
+class F_01_01_REF_FINREP_3_0_On_demand_and_short_notice_Table:
+	INSTRMNT_Table = None # INSTRMNT
+	INSTRMNT_ENTTY_RL_ASSGNMNT_Table = None # INSTRMNT_ENTTY_RL_ASSGNMNT
+	INSTRMNT_RL_Table = None # INSTRMNT_RL
+	PRTY_Table = None # PRTY
+	On_demand_and_short_notices = []# On_demand_and_short_notice[]
+	def calc_On_demand_and_short_notices(self) :
+		items = [] # On_demand_and_short_notice[
+		# Join up any refered tables that you need to join
+		# loop through the main table
+		# set any references you want to on the new Item so that it can refer to themin operations
+		return items
+	def init(self):
+		Orchestration().init(self)
+		self.On_demand_and_short_notices = []
+		self.On_demand_and_short_notices.extend(self.calc_On_demand_and_short_notices())
+		CSVConverter.persist_object_as_csv(self,True)
+		return None
+
+
 class F_01_01_REF_FINREP_3_0_Debt_securities_Table:
 	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT_Table = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT
-	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_Table = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT
 	PRTY_Table = None # PRTY
 	SCRTY_EXCHNG_TRDBL_DRVTV_Table = None # SCRTY_EXCHNG_TRDBL_DRVTV
-	SCRTY_ENTTY_RL_ASSGNMNT_Table = None # SCRTY_ENTTY_RL_ASSGNMNT
 	SCRTY_PSTN_Table = None # SCRTY_PSTN
 	Debt_securitiess = []# Debt_securities[]
-	
 	def calc_Debt_securitiess(self) :
-		items = [] # Non_Negotiable_bonds[
-		for long_Security_accntng_classification in self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT_Table:
-			long_Security_assignment = long_Security_accntng_classification.theLNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT
-			scrty_position = long_Security_assignment.theSCRTY_PSTN
-			scrty_exchng_trdbl_drvtv = scrty_position.theSCRTY_EXCHNG_TRDBL_DRVTV	
-			new_item = Debt_securities()
-
-			for scrty_entty_rl_assignment in self.SCRTY_ENTTY_RL_ASSGNMNT_Table:
-				if scrty_entty_rl_assignment.theSCRTY_EXCHNG_TRDBL_DRVTV.SCRTY_EXCHNG_TRDBL_DRVTV_uniqueID == scrty_exchng_trdbl_drvtv.SCRTY_EXCHNG_TRDBL_DRVTV_uniqueID:
-					new_item.SCRTY_ENTTY_RL_ASSGNMNT = scrty_entty_rl_assignment
-					entty_rl = scrty_entty_rl_assignment.theENTTY_RL
-					prty = entty_rl.thePRTY
-					new_item.PRTY = prty
-					break
-			
-			new_item.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT = long_Security_accntng_classification
-			new_item.PRTY = prty
-			new_item.SCRTY_EXCHNG_TRDBL_DRVTV = scrty_exchng_trdbl_drvtv
-			negotiable = scrty_exchng_trdbl_drvtv.NGTBL_SCRTY_INDCTR
-			# only add if not a negotiable security
-			if not(negotiable == '2'):
-				items.append(new_item)
+		items = [] # Debt_securities[
+		# Join up any refered tables that you need to join
+		# loop through the main table
+		# set any references you want to on the new Item so that it can refer to themin operations
 		return items
 	def init(self):
 		Orchestration().init(self)
@@ -541,45 +400,22 @@ class F_01_01_REF_FINREP_3_0_Debt_securities_Table:
 
 class F_01_01_REF_FINREP_3_0_Non_Negotiable_bonds_Table:
 	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT_Table = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT
-	LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_Table = None # LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT
 	PRTY_Table = None # PRTY
 	SCRTY_EXCHNG_TRDBL_DRVTV_Table = None # SCRTY_EXCHNG_TRDBL_DRVTV
-	SCRTY_ENTTY_RL_ASSGNMNT_Table = None # SCRTY_ENTTY_RL_ASSGNMNT
 	SCRTY_PSTN_Table = None # SCRTY_PSTN
 	Non_Negotiable_bondss = []# Non_Negotiable_bonds[]
-	
 	def calc_Non_Negotiable_bondss(self) :
 		items = [] # Non_Negotiable_bonds[
-		for long_Security_accntng_classification in self.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT_Table:
-			long_Security_assignment = long_Security_accntng_classification.theLNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT
-			scrty_position = long_Security_assignment.theSCRTY_PSTN
-			scrty_exchng_trdbl_drvtv = scrty_position.theSCRTY_EXCHNG_TRDBL_DRVTV	
-			new_item = Non_Negotiable_bonds()
-
-			for scrty_entty_rl_assignment in self.SCRTY_ENTTY_RL_ASSGNMNT_Table:
-				if scrty_entty_rl_assignment.theSCRTY_EXCHNG_TRDBL_DRVTV.SCRTY_EXCHNG_TRDBL_DRVTV_uniqueID == scrty_exchng_trdbl_drvtv.SCRTY_EXCHNG_TRDBL_DRVTV_uniqueID:
-					new_item.SCRTY_ENTTY_RL_ASSGNMNT = scrty_entty_rl_assignment
-					entty_rl = scrty_entty_rl_assignment.theENTTY_RL
-					prty = entty_rl.thePRTY
-					new_item.PRTY = prty
-					break
-			
-			new_item.LNG_SCRTY_PSTN_PRDNTL_PRTFL_ASSGNMNT_ACCNTNG_CLSSFCTN_FNNCL_ASSTS_ASSGNMNT = long_Security_accntng_classification
-			new_item.PRTY = prty
-			new_item.SCRTY_EXCHNG_TRDBL_DRVTV = scrty_exchng_trdbl_drvtv
-			negotiable = scrty_exchng_trdbl_drvtv.NGTBL_SCRTY_INDCTR
-			# only add if not a negotiable security
-			if negotiable == '2':
-				items.append(new_item)
+		# Join up any refered tables that you need to join
+		# loop through the main table
+		# set any references you want to on the new Item so that it can refer to themin operations
 		return items
-	
 	def init(self):
 		Orchestration().init(self)
 		self.Non_Negotiable_bondss = []
 		self.Non_Negotiable_bondss.extend(self.calc_Non_Negotiable_bondss())
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
-	
 
 
 class F_01_01_REF_FINREP_3_0_Current_tax_assets_Table:

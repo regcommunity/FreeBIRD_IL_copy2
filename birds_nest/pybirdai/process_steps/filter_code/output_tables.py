@@ -1,6 +1,6 @@
 from pybirdai.process_steps.pybird.orchestration import Orchestration
 from datetime import datetime
-from pybirdai.annotations.decorators import lineage
+from pybirdai.annotations.decorators import lineage, track_table_init
 from .F_01_01_REF_FINREP_3_0_logic import *
 
 class F_01_01_REF_FINREP_3_0:
@@ -80,10 +80,12 @@ class F_01_01_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_01_01_REF_FINREP_3_0s = []
 		self.F_01_01_REF_FINREP_3_0s.extend(self.calc_F_01_01_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -141,10 +143,12 @@ class F_01_02_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_01_02_REF_FINREP_3_0s = []
 		self.F_01_02_REF_FINREP_3_0s.extend(self.calc_F_01_02_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -171,11 +175,6 @@ class F_04_01_REF_FINREP_3_0:
 		''' return string from SBJCT_IMPRMNT_INDCTR enumeration '''
 		return self.unionOfLayers.SBJCT_IMPRMNT_INDCTR()
 
-	@lineage(dependencies={"unionOfLayers.PRTY_RL_TYP"})
-	def PRTY_RL_TYP(self) -> str:
-		''' return string from ENTTY_RL_TYP enumeration '''
-		return self.unionOfLayers.PRTY_RL_TYP()
-
 	@lineage(dependencies={"unionOfLayers.INSTTTNL_SCTR"})
 	def INSTTTNL_SCTR(self) -> str:
 		''' return string from INSTTTNL_SCTR enumeration '''
@@ -186,25 +185,25 @@ class F_04_01_REF_FINREP_3_0:
 		''' return string from MLTLTRL_DVLPMNT_BNK_INDCTR enumeration '''
 		return self.unionOfLayers.MLTLTRL_DVLPMNT_BNK_INDCTR()
 
+	@lineage(dependencies={"unionOfLayers.PRTY_RL_TYP"})
+	def PRTY_RL_TYP(self) -> str:
+		''' return string from ENTTY_RL_TYP enumeration '''
+		return self.unionOfLayers.PRTY_RL_TYP()
+
 	@lineage(dependencies={"unionOfLayers.MN_DBTR_INDCTR"})
 	def MN_DBTR_INDCTR(self) -> str:
 		''' return string from MN_DBTR_INDCTR enumeration '''
 		return self.unionOfLayers.MN_DBTR_INDCTR()
-
-	@lineage(dependencies={"unionOfLayers.NGTBL_SCRTY_INDCTR"})
-	def NGTBL_SCRTY_INDCTR(self) -> str:
-		''' return string from NGTBL_SCRTY enumeration '''
-		return self.unionOfLayers.NGTBL_SCRTY_INDCTR()
 
 	@lineage(dependencies={"unionOfLayers.TYP_INSTRMNT"})
 	def TYP_INSTRMNT(self) -> str:
 		''' return string from TYP_INSTRMNT enumeration '''
 		return self.unionOfLayers.TYP_INSTRMNT()
 
-	@lineage(dependencies={"unionOfLayers.SCRTY_EXCHNG_TRDBL_DRVTV_TYP"})
-	def SCRTY_EXCHNG_TRDBL_DRVTV_TYP(self) -> str:
-		''' return string from SCRTY_EXCHNG_TRDBL_DRVTV_TYP enumeration '''
-		return self.unionOfLayers.SCRTY_EXCHNG_TRDBL_DRVTV_TYP()
+	@lineage(dependencies={"unionOfLayers.NGTBL_SCRTY_INDCTR"})
+	def NGTBL_SCRTY_INDCTR(self) -> str:
+		''' return string from NGTBL_SCRTY enumeration '''
+		return self.unionOfLayers.NGTBL_SCRTY_INDCTR()
 
 
 class F_04_01_REF_FINREP_3_0_Table :
@@ -217,10 +216,12 @@ class F_04_01_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_04_01_REF_FINREP_3_0s = []
 		self.F_04_01_REF_FINREP_3_0s.extend(self.calc_F_04_01_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -293,10 +294,12 @@ class F_04_02_1_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_04_02_1_REF_FINREP_3_0s = []
 		self.F_04_02_1_REF_FINREP_3_0s.extend(self.calc_F_04_02_1_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -369,10 +372,12 @@ class F_04_02_2_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_04_02_2_REF_FINREP_3_0s = []
 		self.F_04_02_2_REF_FINREP_3_0s.extend(self.calc_F_04_02_2_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -471,10 +476,12 @@ class F_04_03_1_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_04_03_1_REF_FINREP_3_0s = []
 		self.F_04_03_1_REF_FINREP_3_0s.extend(self.calc_F_04_03_1_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -573,10 +580,12 @@ class F_04_04_1_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_04_04_1_REF_FINREP_3_0s = []
 		self.F_04_04_1_REF_FINREP_3_0s.extend(self.calc_F_04_04_1_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -629,10 +638,12 @@ class F_04_05_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_04_05_REF_FINREP_3_0s = []
 		self.F_04_05_REF_FINREP_3_0s.extend(self.calc_F_04_05_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -700,10 +711,12 @@ class F_04_06_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_04_06_REF_FINREP_3_0s = []
 		self.F_04_06_REF_FINREP_3_0s.extend(self.calc_F_04_06_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -776,10 +789,12 @@ class F_04_07_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_04_07_REF_FINREP_3_0s = []
 		self.F_04_07_REF_FINREP_3_0s.extend(self.calc_F_04_07_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -878,10 +893,12 @@ class F_04_08_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_04_08_REF_FINREP_3_0s = []
 		self.F_04_08_REF_FINREP_3_0s.extend(self.calc_F_04_08_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -983,10 +1000,12 @@ class F_04_09_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_04_09_REF_FINREP_3_0s = []
 		self.F_04_09_REF_FINREP_3_0s.extend(self.calc_F_04_09_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -1088,10 +1107,12 @@ class F_04_10_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_04_10_REF_FINREP_3_0s = []
 		self.F_04_10_REF_FINREP_3_0s.extend(self.calc_F_04_10_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -1183,10 +1204,12 @@ class F_05_01_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_05_01_REF_FINREP_3_0s = []
 		self.F_05_01_REF_FINREP_3_0s.extend(self.calc_F_05_01_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -1273,10 +1296,12 @@ class F_06_01_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_06_01_REF_FINREP_3_0s = []
 		self.F_06_01_REF_FINREP_3_0s.extend(self.calc_F_06_01_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -1369,10 +1394,12 @@ class F_07_01_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_07_01_REF_FINREP_3_0s = []
 		self.F_07_01_REF_FINREP_3_0s.extend(self.calc_F_07_01_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -1465,10 +1492,12 @@ class F_07_02_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_07_02_REF_FINREP_3_0s = []
 		self.F_07_02_REF_FINREP_3_0s.extend(self.calc_F_07_02_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -1540,10 +1569,12 @@ class F_08_01_a_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_08_01_a_REF_FINREP_3_0s = []
 		self.F_08_01_a_REF_FINREP_3_0s.extend(self.calc_F_08_01_a_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -1596,10 +1627,12 @@ class F_08_02_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_08_02_REF_FINREP_3_0s = []
 		self.F_08_02_REF_FINREP_3_0s.extend(self.calc_F_08_02_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -1666,10 +1699,12 @@ class F_09_01_1_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_09_01_1_REF_FINREP_3_0s = []
 		self.F_09_01_1_REF_FINREP_3_0s.extend(self.calc_F_09_01_1_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -1731,10 +1766,12 @@ class F_09_01_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_09_01_REF_FINREP_3_0s = []
 		self.F_09_01_REF_FINREP_3_0s.extend(self.calc_F_09_01_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -1787,10 +1824,12 @@ class F_09_02_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_09_02_REF_FINREP_3_0s = []
 		self.F_09_02_REF_FINREP_3_0s.extend(self.calc_F_09_02_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -1879,10 +1918,12 @@ class F_13_01_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_13_01_REF_FINREP_3_0s = []
 		self.F_13_01_REF_FINREP_3_0s.extend(self.calc_F_13_01_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -1929,10 +1970,6 @@ class F_14_00_REF_FINREP_3_0:
 		''' return string from FV_HRRCHY enumeration '''
 		return self.unionOfLayers.FV_HRRCHY()
 
-	@lineage(dependencies={"unionOfLayers.FV"})
-	def FV(self) -> int:
-		return self.unionOfLayers.FV()
-
 	@lineage(dependencies={"unionOfLayers.FV_CHNG"})
 	def FV_CHNG(self) -> int:
 		return self.unionOfLayers.FV_CHNG()
@@ -1948,10 +1985,12 @@ class F_14_00_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_14_00_REF_FINREP_3_0s = []
 		self.F_14_00_REF_FINREP_3_0s.extend(self.calc_F_14_00_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -2013,10 +2052,12 @@ class F_15_00_a_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_15_00_a_REF_FINREP_3_0s = []
 		self.F_15_00_a_REF_FINREP_3_0s.extend(self.calc_F_15_00_a_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -2119,10 +2160,12 @@ class F_18_00_a_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_18_00_a_REF_FINREP_3_0s = []
 		self.F_18_00_a_REF_FINREP_3_0s.extend(self.calc_F_18_00_a_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -2224,10 +2267,12 @@ class F_18_00_b_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_18_00_b_REF_FINREP_3_0s = []
 		self.F_18_00_b_REF_FINREP_3_0s.extend(self.calc_F_18_00_b_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -2316,10 +2361,12 @@ class F_18_00_c_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_18_00_c_REF_FINREP_3_0s = []
 		self.F_18_00_c_REF_FINREP_3_0s.extend(self.calc_F_18_00_c_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -2408,10 +2455,12 @@ class F_18_00_d_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_18_00_d_REF_FINREP_3_0s = []
 		self.F_18_00_d_REF_FINREP_3_0s.extend(self.calc_F_18_00_d_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -2479,10 +2528,12 @@ class F_18_00_e_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_18_00_e_REF_FINREP_3_0s = []
 		self.F_18_00_e_REF_FINREP_3_0s.extend(self.calc_F_18_00_e_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -2595,10 +2646,12 @@ class F_19_00_a_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_19_00_a_REF_FINREP_3_0s = []
 		self.F_19_00_a_REF_FINREP_3_0s.extend(self.calc_F_19_00_a_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -2690,10 +2743,12 @@ class F_19_00_b_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_19_00_b_REF_FINREP_3_0s = []
 		self.F_19_00_b_REF_FINREP_3_0s.extend(self.calc_F_19_00_b_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -2782,10 +2837,12 @@ class F_19_00_c_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_19_00_c_REF_FINREP_3_0s = []
 		self.F_19_00_c_REF_FINREP_3_0s.extend(self.calc_F_19_00_c_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -2874,10 +2931,12 @@ class F_19_00_e_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_19_00_e_REF_FINREP_3_0s = []
 		self.F_19_00_e_REF_FINREP_3_0s.extend(self.calc_F_19_00_e_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -2955,10 +3014,12 @@ class F_20_01_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_20_01_REF_FINREP_3_0s = []
 		self.F_20_01_REF_FINREP_3_0s.extend(self.calc_F_20_01_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -3021,10 +3082,12 @@ class F_20_02_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_20_02_REF_FINREP_3_0s = []
 		self.F_20_02_REF_FINREP_3_0s.extend(self.calc_F_20_02_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -3118,10 +3181,12 @@ class F_20_04_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_20_04_REF_FINREP_3_0s = []
 		self.F_20_04_REF_FINREP_3_0s.extend(self.calc_F_20_04_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -3160,42 +3225,12 @@ class F_20_05_a_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_20_05_a_REF_FINREP_3_0s = []
 		self.F_20_05_a_REF_FINREP_3_0s.extend(self.calc_F_20_05_a_REF_FINREP_3_0s())
-		CSVConverter.persist_object_as_csv(self,True)
-		return None
-
-from .F_20_05_b_REF_FINREP_3_0_logic import *
-
-class F_20_05_b_REF_FINREP_3_0:
-	unionOfLayers = None #  F_20_05_b_REF_FINREP_3_0_UnionItem  unionOfLayers
-	@lineage(dependencies={"unionOfLayers.TYP_ACCNTNG_ITM"})
-	def TYP_ACCNTNG_ITM(self) -> str:
-		''' return string from TYP_ACCNTNG_ITM enumeration '''
-		return self.unionOfLayers.TYP_ACCNTNG_ITM()
-
-	@lineage(dependencies={"unionOfLayers.NGTBL_SCRTY_INDCTR"})
-	def NGTBL_SCRTY_INDCTR(self) -> str:
-		''' return string from NGTBL_SCRTY enumeration '''
-		return self.unionOfLayers.NGTBL_SCRTY_INDCTR()
-
-
-class F_20_05_b_REF_FINREP_3_0_Table :
-	F_20_05_b_REF_FINREP_3_0_UnionTable = None # unionOfLayersTable
-	F_20_05_b_REF_FINREP_3_0s = [] #F_20_05_b_REF_FINREP_3_0[]
-	def  calc_F_20_05_b_REF_FINREP_3_0s(self) -> list[F_20_05_b_REF_FINREP_3_0] :
-		items = [] # F_20_05_b_REF_FINREP_3_0[]
-		for item in self.F_20_05_b_REF_FINREP_3_0_UnionTable.F_20_05_b_REF_FINREP_3_0_UnionItems:
-			newItem = F_20_05_b_REF_FINREP_3_0()
-			newItem.unionOfLayers = item
-			items.append(newItem)
-		return items
-	def init(self):
-		Orchestration().init(self)
-		self.F_20_05_b_REF_FINREP_3_0s = []
-		self.F_20_05_b_REF_FINREP_3_0s.extend(self.calc_F_20_05_b_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -3259,10 +3294,12 @@ class F_20_06_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_20_06_REF_FINREP_3_0s = []
 		self.F_20_06_REF_FINREP_3_0s.extend(self.calc_F_20_06_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -3336,10 +3373,12 @@ class F_20_07_1_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_20_07_1_REF_FINREP_3_0s = []
 		self.F_20_07_1_REF_FINREP_3_0s.extend(self.calc_F_20_07_1_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -3397,10 +3436,12 @@ class F_21_00_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_21_00_REF_FINREP_3_0s = []
 		self.F_21_00_REF_FINREP_3_0s.extend(self.calc_F_21_00_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -3470,10 +3511,12 @@ class F_31_01_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_31_01_REF_FINREP_3_0s = []
 		self.F_31_01_REF_FINREP_3_0s.extend(self.calc_F_31_01_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -3481,10 +3524,6 @@ from .F_41_01_REF_FINREP_3_0_logic import *
 
 class F_41_01_REF_FINREP_3_0:
 	unionOfLayers = None #  F_41_01_REF_FINREP_3_0_UnionItem  unionOfLayers
-	@lineage(dependencies={"unionOfLayers.FV"})
-	def FV(self) -> int:
-		return self.unionOfLayers.FV()
-
 	@lineage(dependencies={"unionOfLayers.FV_HRRCHY"})
 	def FV_HRRCHY(self) -> str:
 		''' return string from FV_HRRCHY enumeration '''
@@ -3526,10 +3565,12 @@ class F_41_01_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_41_01_REF_FINREP_3_0s = []
 		self.F_41_01_REF_FINREP_3_0s.extend(self.calc_F_41_01_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
@@ -3582,36 +3623,12 @@ class F_41_02_REF_FINREP_3_0_Table :
 			newItem.unionOfLayers = item
 			items.append(newItem)
 		return items
+	@track_table_init
 	def init(self):
 		Orchestration().init(self)
 		self.F_41_02_REF_FINREP_3_0s = []
 		self.F_41_02_REF_FINREP_3_0s.extend(self.calc_F_41_02_REF_FINREP_3_0s())
-		CSVConverter.persist_object_as_csv(self,True)
-		return None
-
-from .F_42_00_REF_FINREP_3_0_logic import *
-
-class F_42_00_REF_FINREP_3_0:
-	unionOfLayers = None #  F_42_00_REF_FINREP_3_0_UnionItem  unionOfLayers
-	@lineage(dependencies={"unionOfLayers.CRRYNG_AMNT"})
-	def CRRYNG_AMNT(self) -> int:
-		return self.unionOfLayers.CRRYNG_AMNT()
-
-
-class F_42_00_REF_FINREP_3_0_Table :
-	F_42_00_REF_FINREP_3_0_UnionTable = None # unionOfLayersTable
-	F_42_00_REF_FINREP_3_0s = [] #F_42_00_REF_FINREP_3_0[]
-	def  calc_F_42_00_REF_FINREP_3_0s(self) -> list[F_42_00_REF_FINREP_3_0] :
-		items = [] # F_42_00_REF_FINREP_3_0[]
-		for item in self.F_42_00_REF_FINREP_3_0_UnionTable.F_42_00_REF_FINREP_3_0_UnionItems:
-			newItem = F_42_00_REF_FINREP_3_0()
-			newItem.unionOfLayers = item
-			items.append(newItem)
-		return items
-	def init(self):
-		Orchestration().init(self)
-		self.F_42_00_REF_FINREP_3_0s = []
-		self.F_42_00_REF_FINREP_3_0s.extend(self.calc_F_42_00_REF_FINREP_3_0s())
+		from pybirdai.process_steps.pybird.csv_converter import CSVConverter
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
 
